@@ -1,0 +1,132 @@
+d1 $ s "bd:2*4 [cp:2*2 sn] [arpy:01 arpy:03] drum arpy:2(11,3)" # pan "0 1 0.33 0.66"
+
+d1 $ s "hh hh hh . drum:01/2 sn"
+
+d1 $ s "[hh [hh*2] odx] . drum:01/2 cp/3"
+
+d1 $ s "bd [drum:01/2 cp/3]"
+
+d1 $
+  every 4 (stutWith 3 (1/6)(# lpf 1000)) $
+  s "bd*2 [drum:01/2 cp/3]" #
+  room 0.25
+
+d1 $ gap 5 $ s "juno:3 juno ~ feel*2 newnotes"
+
+d1 $ gap 7 $ s "juno:7 juno ~ feel*5 cp/3 newnotes"
+
+d1 $ slow 4.44 $
+  jux (# speed (range 0.33 1.11 $ fast 3.33 isaw)) (striateBy 999 (1/250) $
+  s "seawolf") #
+  speed (range 0.22 0.99 $ fast 2.22 sine) #
+  delay "0.33" #
+  delayfeedback "0.33" #
+  delaytime "0.33"
+
+
+d1 $
+  every 3 (slow 3) $
+  every 2 (striate (choose [2,32,8,4])) $
+  every 4 (const $
+    s "808*24" #
+    pan (slow 5 $ tri) #
+    speed 0.33) $
+  s "808*12" #
+  pan (slow 8 $ sine) #
+  speed 0.75
+
+d1 $ s "~ ~ bd/3 cp/2"
+
+d1 $
+  every 6 (stut 4 0.5 0.125) $
+  every 7 (# gain (range 0.9 0.5 saw)) $
+  s "cpu9:2*24" #
+  orbit 1 #
+  speed (slow 6 (range 1 1.55 sine)) #
+  lpf (slow 6 (range 500 5000 sine)) #
+  crush (slow 6 (range 7 3 sine))
+
+
+d1 $
+  every 4 (stutWith 3 (1/6)(# lpf 1000)) $
+  s "bd*2 [drum:01/2 cp/3]" #
+  room 0.25
+
+
+hush
+
+
+d1 $
+  slow 3 $
+  s "cp*48" #
+  lpf (slow 8 $ range 1000 8000 sine) #
+  speed (slow 4 $ range 1.1 2.7 sine)
+
+d1 $ cat [s "bd ~ cp [bd ~]", s "cp*2 ~ ~ bd*6"]
+
+
+d1 $
+  every 4 (jux rev) $
+  every 8 (# speed (choose [1, 0.5, 0.75])) $
+  every 6 (# room 0.33) $
+  every 3 (# squiz "1 5") $
+  every 2 (iter 4) $
+  cat [s "~ bd*8?, <arpy:02*6? arpy:04*6? arpy:07*6?>]", s "cp*8? ~", s "[blip(3,8), cp/2, [bd*4 ~ east:03*5?]]"] #
+  delay 0.11 #
+  delaytime 0.5 #
+  delayfeedback 0.11 #
+  cps (slow (choose [2,3,6]) $ (range 0.33 0.66 $ rand) + sine)
+
+
+d1 $ stack [
+  cat $ [
+  s "[cpu8*16?, ~ cpu8:12(3,8)]",
+  s "[cpu9:02*5, ~ ~ cpu9:06*5]",
+  (# lpf "< 1000 2000 >") $
+  s "[cpu9:6*24]"],
+  (every (choose [2,3,4]) (slow 2)).(# gain 0.7).(# cut 1).(# squiz "5 2 1 10").(# speed (choose [0.5,2,1])).(# room 0.5) $
+  cat $ [s "~ ppad*16? ~", "ppad*8*17"]
+  ]
+
+
+p "cpsfun" $ s "scrape" # cps (slow 2 $ 0.5 + saw) # cut 2 # gain 1.1
+
+
+d1 $ every 4
+ (const $ s "808*24" # pan (slow 5 $ tri) # speed 0.33) $
+  s "808*12" #
+  pan (slow 8 $ sine) #
+  speed 0.25
+
+
+d1 $ slow 5 $ striate 10 $ s "arpy:01 arpy:10"
+
+
+--badass
+
+d1 $ every 4 (stutWith 5 (5/6)(# lpf "<1000 2000>").(# room 1)) $
+  gap "<8 6 4 2>" $
+  s "blip*2 [arpy:04/2 [808bd ~ cp , cp*8?] arpy:7/3]" #
+  size 0.9 #
+  squiz "1 5 10 15" #
+  speed (choose [0.5,0.7,0.9]) #
+  shape 0.3
+
+--variation
+
+d1 $ every 4 (stutWith 5 (5/6)(# lpf "<1000 2000>").(# room 1)) $
+  gap "< 8 6 4 2 >" $
+  s "blip*2 [arpy:04/2 [808bd ~ cp , cp*8?] arpy:7/3]" #
+  size 0.9 #
+  squiz "1 5 10 15" #
+  speed (choose [0.5,0.7,0.9]) #
+  shape (choose [0.2,0.1,0.3])
+
+
+
+d1 $
+  often (# speed 0.8) $
+stack [
+  s "bd*16?(3,8)"
+, s "cp"
+] # orbit 1 # gain 0.9

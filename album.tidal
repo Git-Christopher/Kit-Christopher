@@ -1,0 +1,77 @@
+
+let ryk = (binaryN 16 "<45476 100088 9000075 122231 89621>")
+    pats =
+      [
+        ("a", whenmod 11 4 (iter 3) $ stack [
+          struct "<t(3,7) t(<1 5>,14,<0 3>)?>" $
+          note "<af'6 ef'sus2 df'sus2>" #
+          dek 2 1 #
+          octave "<4 4 4 5 4 5>"
+        , repeatCycles 8 $
+          struct ((inv) ("t(<3 2 1>,<7 14>)")) $
+          note "<af f af ef>" #
+          dek 5 1 #
+          octave 2
+        , repeatCycles 4 $
+          foldEvery [13,14,15] (slow "<1 2>" . stripe 2) $
+          struct "t*7" $
+          rakk "2"
+        , struct "{t*3 f f t t*2 t f f f t t*5}%7" $
+          rakk "1"
+        , someCyclesBy 0.22 (mask (binaryN 16 455544)) $
+          someCyclesBy 0.44 (rev . slow 2 . off "<0.0125 0.125>" (ply 3)) $
+          note (arp "<down up down>" "<df'sus2'14 bf'min7'14>") #
+          dek 3 1 #
+          octave 3
+        ]
+        ),
+        ("b", while (iter 4 "<f!3 t>") rev $ whenmod 11 5 (slow 2 . iter 2 . chop 3) $ spaceOut [2,1.95..0.75] $ stack [
+          off 0.011 (id) $
+          note (arp "<[down [up|diverge]] [converge [pinkyup|up]]>" "{af'6'16 [~ bf'min7'11] [df'sus2'9|f'min7'14]}%<3 1 2>") #
+          tabby 6 (dek 2 1)(dek 3 1) #
+          octave "<3 2 4 3 3 2 4 2 3>"
+        , repeatCycles 4 $
+          slow 2 $
+          note "<bf f fs>" #
+          dek 5 1 #
+          octave 2
+        , repeatCycles 4 $
+          struct (binaryN 16 55505) $
+          note "<af'6 df'sus2>" #
+          dek 2 1 #
+          octave 4
+        , rakk "1"
+        , rakk "~ 4"
+        , struct "t*4" $
+          rakk "2"
+        ]
+        ),
+        ("c", whenmod 11 5 (iter 2) $ someCyclesBy 0.11 (const $ slow "<2 3>" $ note "<d3 ds3>" # dek 7 1) $ stack [
+            someCyclesBy 0.22 (mute) $
+            someCyclesBy 0.33 (slow "<2 2 1>" . chop "<2 3 3 3 2>") $
+            repeatCycles 4 $
+            struct (ryk) $
+            note "<[c3 e3] [cs3 [~ f3]]>" #
+            dek 7 1
+          , someCyclesBy 0.22 (struct (ryk)) $
+            struct "t" $
+            rakk "1"
+          , someCyclesBy 0.22 (struct ((inv)(ryk))) $
+            struct "<f [~ t] f f [~ t] f t>" $
+            rakk "3"
+          , slow 4 $
+            struct "<t(6,8) t>" $
+            note "<ef af>" #
+            dek 5 0.5 #
+            octave 2 #
+            gain 0.77
+          , struct "t*2" $
+            rakk "4"
+        ]
+        )
+      ]
+in
+d1 $ ur 256 "a b c" pats []
+
+
+hush

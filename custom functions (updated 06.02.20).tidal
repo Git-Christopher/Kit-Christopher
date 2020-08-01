@@ -1,0 +1,63 @@
+let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
+    spill text2 = sequence_(replicator text2)
+    replicator' n text1 = [putStr (text1) | x <- replicate n text1]
+    spill' n text2 = sequence_(replicator' n text2)
+    destabilizeBy a p = (a <~) p
+    mute p = degradeBy 1 $ p
+    rip a b p = within (0.25, 0.75) (slow 2 . stutWith 8 (a/(-8))(|* gain b)) p
+    devolve p = (# pan (range 0 1 $ slow 8.88 perlin)).(# cps ("<0.65 0.75 0.85 0.95 1.05 1.15>" * (range 0.55 1.11 $ slow 22.22 perlin))) $ p
+    compress x p = slow x $ (# (nudge (range 0 1 $ slow 2 sine))) $ p
+    rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
+    pry p = slow 2 $ foldEvery [4,5,6] (stripe 2) $ p
+    funcrush = s "funcrush"
+    shrand x = (x ~>) $ rand
+    ccvrand shiftAmount = ccv (range 0 127 $ shrand shiftAmount)
+
+spill "check 1 2 "
+
+--midimap
+
+d1 $
+  stack [
+    dek ( fmap ([0,0,0]!!) $ pat) # funcrush
+  , ccn 0 # ccvrand 101
+  ] # funcrush
+
+--chords
+
+major maj minor min major7 maj7 dom7 minor7 min7 aug
+dim dim7 one 1 five 5 plus sharp5 msharp5 sus2 sus4 six 6
+m6 sevenSus2 7sus2 sevenSus4 7sus4 sevenFlat5 7f5 m7flat5
+m7f5 sevenSharp5 7s5 m7sharp5 m7s5 nine m9 m7sharp9 m7s9
+maj9 nineSus4 ninesus4 9sus4 sixby9 6by9 m6by9 sevenFlat9
+7f9 m7flat9 m7f9 sevenFlat10 7f10 nineSharp5 9s5 m9sharp5
+m9s5 sevenSharp5flat9 7s5f9 m7sharp5flat9 eleven 11 m11
+maj11 elevenSharp 11s m11sharp m11s thirteen 13 m13
+
+--notes
+
+c  -12
+df -11
+d  -10
+ef -9
+e  -8
+f  -7
+fs -6
+g  -5
+af -4
+a  -3
+bf -2
+b  -1
+c   0
+df  1
+d   2
+ef  3
+e   4
+f   5
+fs  6
+g   7
+af  8
+a   9
+bf  10
+b   11
+c   12

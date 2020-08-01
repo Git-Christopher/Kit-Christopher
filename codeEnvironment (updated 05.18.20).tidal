@@ -1,0 +1,2206 @@
+
+--run with scissors
+
+setcps (135/60/4)
+
+d1 $ stack [
+  every 2 (# speed 0.47) $ every 11 ((slow 2) . (struct (ascii "[bite ] [ me]"))) $
+  every 4 ((# note "ds4'maj7") . (# gain 0)) $ every 6 (ply 1) $
+  s "cpu8:07(<5 5 3>,8,<0 1>)" #
+  rel (range 0.7 1.2 $ slow 6 sine) #
+  speed 0.353 #
+  note "c4'min7 c4'ninesus4" #
+  gain 1 #
+  lpf (range 500 10000 $ slow 16 sine) #
+  legato 1
+, every 4 (ply "~ 1 1 1 2") $ every 11 (struct "t(2,7)") $ s "ton(5,8,<0 2 1>)" # gain 1
+, every 4 (jux rev) $ every 4 (stutWith "<4 8 16>" (1/16) (|* gain 0.9)) $ s "~ 808:1"
+  # gain 1
+, every 2 (# accelerate (-0.9)) $
+  struct ("t(5,8)") $
+  s "yolo" #
+  note "<0 0 0 0 -3 -4>" #
+  cut 1 #
+  gain 1 #
+  accelerate 1
+, every 4 (# speed (choose [0.5,2])) $
+  jux rev $ off 0.25 (# note "7") $
+  s "beep*16?" #
+  speed 1 #
+  note (scale "minPent" "0..7") #
+  hpf (range 50 2500 $ slow 6 sine) #
+  gain 1
+, every 4 (rev) $
+  slow 8 $
+  striateBy 128 (1/32) $
+  s "rib" #
+  gain 0
+, s "now/4" #
+  speed "<0.5 ~ 0.75>" #
+  gain (range 0.9 0.25 $ slow 3 sine)
+]
+
+clutchIn 1 8 $ stack [
+  foldEvery [6,7,8] (# gain 0) $
+  every 3 (# speed 0.47) $
+  ply "1 2 3" $
+  s "cpu8:07" #
+  note "c4'min7 c4'ninesus4" #
+  speed 0.353 #
+  gain 1
+, s "ton(<5 3>,8)"
+, every 3 rev $
+  every 3 (stutWith 25 (1/32) (|* gain 0.93)) $
+  s "~ 808:1/2" #
+  gain 1
+, every 3 (# accelerate (-0.9)) $
+  s "yolo(<3 5>,8,1)" #
+  note "<0 0 0 -3>" #
+  accelerate 1 #
+  cut 1
+] # cps (135/60/4)
+
+
+hush
+
+d1 $ stack [
+  every 4 ((# note "ds4'maj7").(# gain 0.8)) $
+  foldEvery [14,15,16] (# gain 0) $
+  every 11 (struct (ascii "[bo ] [ ring]")) $
+  every 3 (ply "1 1 1 1 1") $
+  s "imp(<5 5 3>,8,<0 1>)" #
+  speed 1 #
+  note "c'min7 c'ninesus4" #
+  gain 0.89 #
+  rel (range 0.25 0.75 $ slow 8 sine) #
+  crush (range 10 4 $ slow 8 sine)
+, every 11 (struct "t(2,7)") $
+  every 3 (ply "~ 1 1 1 2") $
+  s "ton(5,8)"
+, every 11 (struct "t(2,7)") $
+  s "yolo:2(<3 5 2>,8,<2 4>)" #
+  rel 1.35 #
+  note "0 0 0 -1 7"
+, every 6 (fast 2) $
+  every 6 (rev) $
+  every 6 (plyWith "<15 10 20>" (|* gain 0.93)) $
+  s "cpu8:3" #
+  gain 1
+] # cps (135/60/4)
+
+
+hush
+
+d1 $ (# pan (range 0 1 $ slow 8 sine)) $
+  someCycles rev $ (# cps ("<0.5 1 2.5 0.8>" * (range 0.5 2 $ slow 3.1 sine))) $
+  plyWith "<10 20 15>" ((|* gain 0.97).(|* legato 0.97).(|* size 1.05)) $
+  stack [
+  s "cpu8:07" #
+  speed 0.353 #
+  note "<c5'min7 c'ninesus4 c5'min7 ds4'maj7>" #
+  gain 1 #
+  legato 1 #
+  size 0.5 #
+  room 0.5 #
+  orbit 1
+, s "ton"
+, s "car" #
+  note "<c5>"
+, s "~ ~ cpu8:3/2" #
+  gain 1.2 #
+  rel 0.7
+]
+
+
+hush
+
+d1 $ cat [
+stack [
+    s "808(3,7)" #
+    speed 0.353 #
+    note "c'min7" #
+    gain 1
+  , s "arpy(3,7)" #
+    note "c'min7" #
+    gain 0.8
+  , s "clubkick(3,7)"
+  , every 2 (# gain 0) $
+    s "~ ~ [~ cp*3 ~]" #
+    gain 1
+  ]
+  , stack [
+    s "808(4,7)" #
+    speed 0.47 #
+    note "c'min7" #
+    gain 0.99
+  , s "moog(<4 3 5>,7,<0 1 3 5>)?" #
+    rel 0.85 #
+    gain 1.1
+  , s "bd(5,7)" #
+    gain 1.2
+  , every 2 (# gain 0) $
+    s "cp(2,7,2)" #
+    gain 1
+  ]
+  ]
+
+
+hush
+
+d1 $ stack [
+  every 4 (# note "ds4'maj7") $
+  every 3 (jux rev) $
+  s "cpu8:07(<1 3 5>,7)" #
+  speed 0.47 #
+  note "c4'min7" #
+  gain 0.9 #
+  legato (range 2 0.8 $ slow 12 sine)
+, every 16 (jux rev) $
+  every 16 (plyWith 6 (|* gain 0.9).(|* speed 0.85)) $
+  s "ton(<1 3 5>,7,<0 1>)" #
+  speed 1 #
+  gain 1
+, foldEvery [4,5,6] (slow 2) $
+  note (scale "<minPent>" $
+  cat ["<-1 -4 -9 -2 0 1 3> *14", "<-5 -6 -7 -3 -2> *14", "<-11 0 ~ -2> *14"]) #
+  s "car" #
+  gain 0.77 #
+  rel (range 0.2 0.9 $ slow 6 sine) #
+  lpf (range 500 10000 $ slow 6 sine) #
+  coarse "<0 2 4 6 8 10>"
+, s "cpu8:03(<1 2>,7,<1 2>)" # gain 1
+, every 4 (# note "ds") $
+  s "yolo:01(<1 3 5>,7)" #
+  note "c" #
+  gain 1 #
+  rel 0.777
+, every 4 (fast 2) $
+  s "cpu9:14*14" #
+  bpf (range 10000 4000 $ slow 6 sine) #
+  gain (range 1 0.7 $ slow 4 saw)
+] # cps (135/60/4)
+
+
+hush
+
+d1 $ stack [
+  struct (every 3 inv "t(5,8)") $ s "cpu8:03"
+, every 4 (# gain 0) $
+  struct (every 3 inv "t(5,8,<0 1>)") $
+  s "ton" #
+  gain 1
+, slow 2 $ struct (ascii "<[ bite] [ me]>") $
+  s "cpu9:6" #
+  rel 0.2
+, every 3 (stut 3 (3/8) (0.5)) $
+  every 4 (# speed 0.5) $
+  s "car*8" #
+  note "<0 2 4 7 -7 5 4 0> *5" #
+  gain 0.9 #
+  rel 0.5
+, every 7 (# gain 0) $
+  s "yolo:01(3,8)" #
+  note "<0 0 0 5 2 2 2>" #
+  gain 0.9 # cut 1
+]
+
+d1 $ every 4 (# note "ds4'maj7") $
+  every 4 (jux rev) $
+  s "cpu8:07(<1 3 5>,7)" #
+  speed 0.47 #
+  note "c4'min7" #
+  gain 0.85
+
+
+
+setcps 0.4
+
+d1 $
+  every 6 (slow 32 . striate' 1046 (1/200) . (# delay 0.6)) $
+  every 3 (# speed 0.5) $
+  sometimesBy 0.2 (# accelerate 1) $
+  s "bev*8" # begin (range 0.125 0.33 $ sine) #
+  legato (range 0.88 1.2 $ sine) #
+  room 0.9 #
+  gain (range 0.9 0.45 $ slow 8 $ sine)
+
+
+
+d1 $ whenmod 4 2 (stut 7 0.5 0.125) $
+  s "blip*16" #
+  gain 0.7 #
+  speed (range 1 2 $ (rev) saw)
+
+d1 $ cat [
+    s "~ bd*3"
+  , s "~ ~ ~ [cp*3]"
+  , s "~ arpy*8"
+] # gain 0.8
+
+
+hush
+
+d1 $ s "bd(5,16) [[cp*1.5] bend:1 sn]"
+
+
+d1 $ stack [
+  s "~ ~ stab(3,8)" #
+  speed (range 0 3 $ sine) #
+  cut 1 #
+  room 1.5
+  , s "~ bd:3/3 ~ [cp ~ bd]"
+] # cps (slow 8 $ range 0.8 1.6 saw)
+
+
+d1 $ every 4 (slow 4 . stutWith 6 (1/24)(|* gain 0.9)) $
+  jux rev $
+  chunk 3 (slow 2 . (|- n 11)) $
+  off 0.0125 (|+ 5) $
+  struct (iter 4 "t(6,8)") $
+  n (scale "minPent" "0 .. 7") #
+  s "sid" #
+  cut 1 #
+  delay 0.625 #
+  room 1
+
+
+hush
+
+d1 $
+  chunk 3 (slow 4 . (|- n 11)) $
+  off 0.0125 (|+ 5) $
+  struct (iter 4 "t(4,4)") $
+  n (scale "melodicMinor" "0 .. 7") #
+  s "tabla" #
+  cut 1 #
+  delay 0.5
+
+
+hush
+
+d1 $ s (slow 3 "[[bd:02(3,8)] , [~ ~  ~ cp(4,4) ~ ~ cp:01] , [sn/2 ~ bass/3]]") #
+  gain 0.9 #
+  room 1
+
+d1 $ s "bd(5,16) [[cp*1.5] bend:1 sn]"
+
+
+d1 $ stack [
+    s "~ ~ stab(3,8)" #
+    speed (range 0 3 $ sine) #
+    cut 1 #
+    room 1.5
+  , s "~ bd:3/3 ~ [cp ~ bd]"
+  ] # cps (slow 8 $ range 0.8 1.6 saw)
+
+
+hush
+
+d1 $ s "[bd/6, sd*2, cp] [hh/3, arpy:07, arpy:09, mt] [arpy/7 drum*2] [odx*4] feel future" # crush "<3 8 4>"
+
+d1 $ s "hh*8" # nudge (range 0 1 $ slow 4 sine)
+
+d1 $ foldEvery [8..16] (# nudge (slow 16 $ range 0 1 sine)) $ s "hh*16"
+
+d1 $ s "cp*4" # nudge (squeeze "[0 0 0 0 1]/5" [slow 4 $ range 0 1 sine, 0])
+
+d1 $ s (samples "hc*8" (iter 4 $ run 4))
+
+clutch 1 $ s "bd(5,8)"
+
+setcps (150/60/4)
+
+d1 $ stack [
+  every 4 (ply "1 1 1 1 1") $ s "cpu8:07(3,7)?" #
+  speed 0.353 #
+  note "c'min7 c'ninesus4" #
+  gain 1.1
+, s "ton(3,7)?"
+, s "~ cpu9:8"
+, every 3 (# gain 0) $
+  s "yolo(<3 5>,7,<0 1 0>)" #
+  rel (range 0.5 0.75 $ slow 16 sine) #
+  gain 1 #
+  orbit 1
+]
+
+
+d1 $ s (samples "moog*11" (run 2)) #
+  speed 2 #
+  cut 1
+
+d1 $
+  slow 3 $
+  jux rev $
+  off 0.625 (+12) $
+  note (scale "minPent" $
+  cat ["<0(<3 5>,8) 1(<1 3>,8,<0 1 2>) 4 -7> *8", "<-3 4(<3 5 7>,8) 7 -11> *8"]) #
+  s "car" #
+  rel (range 0.2 0.9 $ slow 6 sine) #
+  lpf (range 1000 10000 $ slow 6 sine)
+
+d1 $ slow 2 $ note (scale "minPent" $ cat ["<-4 -6 -9 -2> *14", "<-5 -7 -3 -2> *14"]) # s "arpy"
+
+d1 $ stack [
+  every 3 (# speed 0.75) $
+  every 4 (# gain 0) $ s "trl(<1 2>,5)" #
+  gain 0.9 #
+  speed 1
+, every 4 (stut 10 (3/8) (0.1)) $
+  s "cpu8(<1 2>,5)"
+, every 4 (stutWith 9 (1/16) (|* gain 0.85)) $
+  s "cpu8:03(1,5,2)" #
+  gain 1
+]
+
+
+hush
+
+d1 $
+  every 3 (rev) $
+  every 2 (# speed 0.33) $
+  n (scale "minPent" "0..7") #
+  cat [s "arpy(3,8)", s "arpy*8", s "~ arpy*16"] #
+  speed 0.25 #
+  delay 0.33 #
+  delayfeedback 0.66 #
+  delaytime 0.66 #
+  pan (range 0 1 $ slow 8 sine) #
+  lpf (range 250 5000 $ slow 4 sine)
+
+
+hush
+
+d1 $
+  every 3 (rev) $
+  every 2 (# speed 0.33) $
+  every 6 (striate (choose [5,10,15,20])) $
+  n (scale "minPent" "0 .. 7") #
+  cat [s "arpy(3,8)", s "arpy*8", s "~ arpy*16"] #
+  speed 0.25 #
+  delay 0.33 #
+  delayfeedback 0.66 #
+  delaytime 0.66 #
+  room 0.8 #
+  size 0.7 #
+  gain 0.7
+
+
+d1 $
+  every 3 (degradeBy 0.1) $
+  every 7 (# crush 4) $
+  cat [s "bd ~ ~ ~ ~ cp bd [bd]", s "bd ~ hh*9 cp bd [bd]"] #
+  vowel "[a e ~ i o u]/4" #
+  lpf (range 1000 8000 saw) #
+  room 0.25 #
+  gain (range 0.77 0.99 sine)
+
+
+d1 $ slow 1.125 $ stack [
+    every 4 (rev) $
+    s "808(5,8)" #
+    speed 0.47 #
+    note "<[f4'maj7] [a3'7f9 [d3'm9 ~]] [gs3'dim7 ~ [a3'maj]]*2>"
+  , every 2 (rev) $
+    every 2 (stutWith 3 (1/16)(|* gain 0.9)) $
+    s "bd(3,8,<1 3>)" # gain 1
+  , every 3 (stutWith 2 (3/8) id) $
+    s " ~ cp"
+  ]
+
+hush
+
+d1 $ cat [ every 2 (rev) $ s "[bd ~ ~ cp [bd bd] cp, ~ cp*6(2,6), bin(3,6)]", s "808:1*2 ~ cp*3", s "bd*33" # hpf (range 50 5000 saw)]
+
+d1 $ (0.23 ~>) $ s "bin(2,8)" # speed 1
+
+
+hush
+
+
+d1 $
+  slow 24 $
+  striate 6 $
+  n (run 26) #
+  s "bev" #
+  speed 1 #
+  cut 1 #
+  delay 0.21 #
+  delaytime 0.32 #
+  delayfeedback 0.2 #
+  gain 1.1
+
+d1 $ s "bd*2 ~ ~ cp" #
+  cut 1 #
+  delay 0.25 #
+  delayfeedback 0.25 #
+  delaytime 0.1
+
+d1 $
+  every 3 (rev) $
+  every 2 (# speed 4) $
+  cat [s "arpy*4", "arpy(3,8)"] #
+  n (run 8) #
+  speed 0.22
+
+
+hush
+
+d1 $
+  every 2 (stutWith 2 (0.125) (# lpf (slow 6 (range 250 6500 sine)))) $
+  every 4 (rev) $
+  note (arpg "e'min7 [0,4,7,11]") #
+  s "moog(7,8)" |> slow 3 (pan isaw) #
+  slow 6 (crush (range 10 4 sine)) #
+  slow 2 (accelerate "<0 -0.2>") #
+  cut 1 #
+  speed "<1 2 1 2>" #
+  delay 0.25 #
+  delayfeedback 0.33 #
+  delaytime 0.2222
+
+
+d1 $
+  s (slow "<3 2 1 0>" "click*50") |> slow 4 (pan sine) #
+  cut 1 #
+  speed (choose [3.33,2.22,1.11,0.66]) #
+  delay (range 0.33 0.25 sine) #
+  delaytime (range 0.33 0.66 sine) #
+  delayfeedback (range 0.25 0.75 saw) #
+  slow (choose [2,3,4]) (hpf (range 50 5000 sine)) #
+  gain 0.9
+
+
+d1 $
+  every 2 (degradeBy 0.5) $
+  stut 3 0.5 0.125 $
+  slow 2 $ note (scale "minPent" "0..7..0..7..5") #
+  s "cb*8" #
+  speed "0.6 0.8" #
+  sustain 1.9 #
+  slow 6 (room (range 0.2 0.4 sine)) #
+  slow 6 (size (range 0.2 0.4 sine)) #
+  slow 6 (crush (range 10 4 sine)) #
+  delay "0.25 0.33 0.44" #
+  delaytime 0.66 #
+  delayfeedback 0.125
+
+
+hush
+
+d1 $
+  stutWith 16 (choose ([1/4,1/8,1/16])) (|* gain 0.9) $
+  s "[arpy*2, ~ arpy]" #
+  n ("<0 3 4 7>") #
+  gain 1 #
+  speed "<0.25 1 2 1.5 0.5 0.75 1 1.125 1.5>" #
+  delay 0.456 #
+  delayfeedback 0.5 #
+  delaytime 0.33 #
+  orbit 0
+
+d1 $
+  s "bd*36" #
+  slow 5 (gain (range 0.9 0.444 sine)) #
+  orbit 1
+
+
+d1 $
+  slow 4 $
+  note (arp "down" "a6'min7'16") #
+  s "moog" #
+  legato 0.5
+
+
+hush
+
+d1 $
+  stack [
+   whenmod 6 5 (stutWith 6 (choose [1/12,1/16,1/4]) (|* gain 0.85)) $
+   note (arpg "<c'maj7 e'min7 d'dom7>") #
+   s "fm:14" #
+   cut 1 #
+   speed 0.6 #
+   gain 1
+, every 4 (# crush 4) $
+  s "[bd*16?, ~ cp]"
+, every 4 (jux (rev)) $
+  every 2 (# cps (slow 8 $ 0.5 + sine)) $
+  s "hh*16" #
+  orbit 1
+ ]
+
+
+hush
+
+d1 $ stack [
+  note (arp "<pinkyup diverge>" "<c'maj7'8 a'min7'6 b'min7'7>") #
+  s "[superchip(6,8), [ ~ superchip(6,8) ~]]" #
+  octave 4 #
+  gain 0.8
+, every 4 (stut 3 0.5 0.25) $
+  s "superchip*9" #
+  note "<0 2 4 5>" #
+  orbit 1 #
+  gain 0.9 #
+  octave 3
+]
+
+
+d1
+  $ fast 2
+  $ note (arpg "<a'min7 [0,4,5,7] c'maj7 [0,4,5,7] d'min7 [0,4,5,7]>")
+  # s "superchip*8"
+  # octave 3
+  # gain 1
+  # legato (slow 16 (range 0.5 1 sine))
+  # attack (slow 4 (range 0.125 0.8 sine))
+  # release 0.25
+
+d1 $ stack [
+  every 6 (# gain 0) $
+  every 3 (ply 2) $
+  s "bd(5,8)?"
+, every 6 (stutWith 2 (3/8) id) $
+  cat [s "~ cp", "~ cp*2"]
+, every 6 (# delay 0.33).(# delaytime 0.25).(# delayfeedback 0.66) $
+  bite 4 "0.7 0.6 0.5 0.4 0.3" $
+  s "hh*12" #
+  hpf (slow 8 (range 500 5000 sine)) #
+  accelerate "0 -1 1 0 0 1 -1" #
+  orbit 1
+, every 6 ((ply 2).(# note "4")) $
+  s "moog(7,8)" #
+  vowel "<a a e e i i o o u u>" #
+  cut 1 #
+  speed "<1 1.5 0.75 1>" #
+  gain 0.9
+]
+
+
+hush
+
+d1 $ stack [
+    every 3 (stutWith 2 (0.0625*3) (stutWith 20 (0.0625) (|* gain 0.9) . (|* lpf 0.7)) )
+    $ weaveWith 3 (s "[~ cp(<3 5 7>,8), bd]")
+      [slow 2,
+       (# speed "0.8"),
+       (# squiz 10)
+       ]
+      # gain 1
+      # lpf 10000
+    , foldEvery [4,5,6] (# speed 1) $ slow 4 $ s "fm:14*4" # end "<0.25 0.5 1 0.5>" # cut 1 # speed 0.75 # orbit 1 # gain 1
+  ]
+
+hush
+
+d9 $ stack [
+  foldEvery [8,9,10,11,12] (# speed 0.75) "fm:14*12" # gain 0.8
+  , s "bd*12"
+  , every 3 (stutWith 2 (3/8) id ) $ s "~ cp"
+  ] # legato (range 0.25 0.85 sine) # nudge (range 0 1 $ slow 8 sine)
+
+d9 $ every 2 (# nudge (range 0 1 $ slow 4 sine)) $ s "hh*8"
+
+
+d9 $ stack [
+  slow 6 $ struct (ascii "one word") $ note "<[g'maj7'iii a'min7'ii ]>"
+    # s "gtr"
+    # legato 1
+    # speed (slow 6 (range 0.455 0.499 sine))
+    # squiz "10 5 4 3 11 12"
+    # gain 0.9
+]
+
+  , every 6 (stutWith 2 (3/8) (stutWith 10 (1/16) (|* gain 0.7) . (|* lpf 0.7)))
+    $ (slow 3 (range 0.25 0.75 sine) ~>)
+    $ every 7 (stutWith 2 (2/3) (ghost)) $ s "[bd, ~ cp]"
+    # lpf 5000
+    # gain 1
+    # orbit 1
+  , every 2 (fast 2) $ every 3 (jux (rev)) $ every 4 (stutWith 3 (0.125) (# accelerate "-1")) $ s "hh(<3 6>,8,0)" # gain 0 # orbit 2
+  ]
+
+hush
+
+d9 $ stack [
+    slow 2
+    $ every 3 rev
+    $ every 4 (jux (rev))
+    $ every 8 (# crush 4)
+    $ plyWith 7 (|* legato 0.888) . (|* gain 0.8)
+    $ note "<g3'maj7'iii g2'maj7'ii g3'maj'7 g4'maj7 a3'min7'ii e'min7>"
+    # s "arpy"
+    # n "[0 3 7 7 3]"
+    # lpf (slow 2 (range 500 10000 saw))
+    # legato 1.5
+    # gain 0.89
+    # delay 0.6
+    # delaytime 0.125
+    # delayfeedback 0.2222
+]
+
+hush
+
+
+d2 $ every 4 (rev) $ s "hh*24 cp/2" # bpf (range 250 2500 $ slow 8 sine) # gain "1.3 1.2 1.1 1.0" # room 0.5 # size 0.75
+
+d2 silence
+
+
+
+
+
+d1 $ stack [
+    foldEvery [9,10,11,12] (# gain 0) $ every 4 (# crush 4) $ every 3 (stutWith 3 (1/3) (|* gain 0.9))
+  $ slow 2 $ struct (ascii "o n e") "control" # speed "<0.75 0.5 1>" # gain 0.95
+, cat [s "[bd(2,8), ~ cp/2]", s "[bd*4, cp*2]", s "odx*9"]
+, every 6 (rev) $ every 3 (plyWith 30 (|* gain 0.9)) $ s "clubkick" # gain 0.95
+]
+
+
+hush
+
+d2 silence
+
+
+
+d1 $ stack [
+  foldEvery [2,3,4] (# speed 0.75)
+  $ every 6 ((rev) . (slow 2) . (plyWith "<10 6 4>" (|* gain 0.85) . (|* size 0.9) . (|* room 0.9)))
+  $ s "control(8,12)?"
+  # gain 1
+  # room 0.7
+  # size 0.33
+  # orbit 0
+, every 4 (stutWith 4 (2/3) (|* gain 0.9) . (stutWith 12 (1/6) (|* gain 0.8)))
+  $ s "bd(8,12)?"
+  # gain 1
+  # orbit 1
+, every 2 (# gain 0) $ s "bass(<2 4>,<8 6>)"
+  # gain 1
+, s "linnhats*8" # n "1 2 3 4*3"
+]
+
+d1 silence
+
+d2 silence
+
+d2 $ stack [
+  superimpose (+7)
+  $ s "metal(8,12)?" # n "5"
+  # note "<cs2'min7 cs2'ninesus4 cs2'min7 cs1'min7 gs2'min7 gs2'min7 gs2'min7 gs1'min7>"
+  # crush (range 10 4 $ slow 4 saw)
+  # rel (range 0.2 0.75 $ slow 4 saw)
+  # gain (range 0.7 1.1 $ slow 4 saw)
+, s "clubkick(8,12)?" # orbit 2
+, every 12 (rev) $ every 6 (plyWith 24 (|* gain 0.875)) $ s "cp"
+  # gain 1
+, s "linnhats(8,12)?" # n (run 12) # gain 0.9 # orbit 2
+, every 6 ((slow 2) . (rev) . (off 0.33 (+7))) $ every 3 (plyWith 2 (|* gain 0.9)) $ s "metal(5,6)" # n "<5 7>" # note (arpg (scale "cs1'min7" "0..7")) # gain 1
+]
+
+d4 silence
+
+d4 $ every 6 ((slow 2) . (rev) . (off 0.33 (+7))) $ every 3 ((slow 4) . (plyWith 6 (|* gain 0.95))) $ s "superchip(5,6)" # n "5" # note "<cs4'min7 cs4'min7 cs4'min7 cs3'ninesus4>" # gain 1 # rel (range 0.5 0.8 $ slow 2 sine)
+
+d3 $ off 0.25 (+9) $ slow 8 $ striateBy 128 (1/8) $ s "sax" # gain 1 # speed "<0.75 1>"
+
+hush
+
+ d1 $ every 3 (slow 2) . (rev) $ chew 5 "4*2 1 3 [5 0 1*2] [0 3]" $ arp "<updown pinkyup>" $ n "<c4'maj7 e3'min7'iii>" # s "superchip" # cutoff (range 750 5000 $ slow 4 saw)
+
+
+
+
+
+
+d1 $ every 6 ((jux (rev)) . (plyWith 6 (|* gain 0.8))) $ stack [
+  s "[voodoo(<3 6>,8), bd(<3 6>,8), control(<3 4 6>,8)?]" # n "1 1 ~ 5" # gain 1
+, every 5 (stutWith 2 (3/8) id) $ s "~ cp"
+]
+
+
+hush
+
+d1 $ stack [
+  every 7 (# n "3") $ s "arpy(<5 6>,8)" # n "1" # attack (range 0.4 0.8 $ slow 4 sine) # note "c4'min7 c3'min7"
+, every 7 ((rev) . (plyWith 6 (|* speed 1.1) . (|* gain 0.9))) $ s "bd(<5 6>,8)" # speed 1 # gain 0.9
+, every 7 (stutWith 3 (3/8) (# delay 0.33) . (# delaytime 0.1) . (# delayfeedback 0.7)) $ s "~ [~ cp]" # orbit 1
+]
+
+
+
+d1 $ stack [
+  every 3 (stutWith 2 (1/16) (stutWith 10 (1/32) (|* gain 0.89) . (# vowel "[a*2 e*2 i*2 u*2 o*2]")))
+  $ s "bd(3,8)"
+  # gain 1
+, s "arpy(7,8)?" # n "<1 3 5 1>" # note "c3'min7" # attack (range 0.6 1 $ slow 4 sine) # legato 1.5
+, cat $ [s " ~ [~ cp]", s " ~ [~ 808]" # speed 0.47 # gain 1 # delay 0.5 # delaytime 0.333 # delayfeedback 0.666]
+, s "808:01*16"
+]
+
+
+
+
+setcps (150/60/4)
+
+d1 $ stack [
+  every 5 (# gain 0) $ every 3 (# speed 0.47) $ every 4 ((# note "ef4'maj7") . (# gain 0)) $ every 11 (struct (ascii "[what ] [ now]"))
+  $ s "cpu8:07(<5 5 3>,8,<0 1>)"
+  # gain 0
+  # speed 0.353
+  # note "c4'min7 c4'ninesus4"
+  # lpf (range 500 15000 $ slow 3.1 sine)
+, every 4 (ply "~ 1 1 1 2") $ every 11 (struct "t(2,7,1)") $ s "ton(5,8,1)?" # gain 1.2
+, every 3 (# accelerate (-0.9)) $ s "yolo(5,8,2)"
+  # note "<0 0 0 0 -3 -4>"
+  # cut 1
+  # accelerate 1
+  # gain 0
+, off 0.25 (# note "7") $ s "beep*16?"
+  # note (scale "minPent" "0..7")
+  # gain (range 1 0.4 $ slow 7.3 sine)
+, every 4 (jux rev) $ every 4 (stutWith 24 (1/24) (|* gain 0.93)) $ s "~ 808:1"
+  # gain 1
+, someCycles rev $ slow 16 $ striateBy 246 (1/50) $ s "now" # speed "<0.5 1 ~ 0.75 ~ >" # gain 0.8
+, slow 8 $ striateBy 128 (1/100) $ s "rib" # speed 0.5 # gain 0.9 # delay 0.5 # delaytime 0.25 # delayfeedback 0.33 # orbit 1
+]
+
+
+d1 $ (# pan (range 0 1 $ slow 8 sine))
+    $ someCycles rev $ (# cps ("<0.5 1 2.5 0.8>" * (range 0.5 2 $ slow 3.1 sine)))
+    $ plyWith "<10 20 15>" ((|* gain 0.97) . (|* legato 0.97) . (|* size 1.05))
+    $ stack [
+  s "cpu8:07" # speed 0.353 # note "<c5'min7 c4'ninesus4 ds4'maj7>" # gain 1 # legato 1 # size 0.5 # room 0.5 # orbit 1
+, s "ton"
+, s "beep" # note "<c5 ef4>"
+, s "~ ~ 808:1" # gain 1.2 # rel 0.9
+]
+
+
+hush
+
+
+
+
+d1 $ stack [
+  s "cpu8:7(<5 5 3>,8)?" # speed 0.484 # note "c4'min7 ef4'maj7 af4'maj7"
+, every 4 (# accelerate ("<(-1) 1>")) $ s "yolo(5,8,1)" # note "<0 -2 -7 3 5 10>" # cut 1 # accelerate 0
+]
+
+
+
+
+
+
+
+
+d1 $ stack [
+  every 3 (stutWith "<3 7 14 28>" (0.25) (|* gain 0.8)) $
+  rot "<1 2 3 4 5>" $
+  note (scale "bartok" "0..7..0") #
+  s "arpy(<3 4 6>,4)"
+  # speed 0.5
+  # gain 0.9
+, every 3 (plyWith 2 (|* gain 0.85)) $ s "bd(5,8,<0 1>)?" # gain 1
+, s "~ cp"
+]
+
+hush
+
+
+
+
+setcps 0.65
+
+d1 $ cat [s "supersaw(<3 5 7>,8,<0 1 2>)" # legato 1 # rel (range 0.125 0.9 $ slow 6 tri) # note "<c4'min7 af3'maj7 [~ bf3'11]>",
+fast 2 $ (stutWith 5 (0.5) (|* gain 0.9)) $ s "supersaw*4" # gain 1 # legato 1 # rel (range 0.125 0.9 $ slow 6 tri) # note (arpg "<c5'min7 af4'maj7 [~ bf4'11]>")]
+
+d2 $ (# cps ("<0.75 1.25>" * (range 0.5 2 $ slow 8 sine))) $ stack [
+ every 4 (stutWith 4 (0.125) ((|* size 1.1) . (|* room 1.1))) $ s "cp(<1 2>,8,<1 2>)"
+  # speed "<0.75 ~ 1 1.2>"
+  # size 1
+  # room 0.5
+, every 3 (# gain 0) $ s "bd*16?"
+  # gain 1
+]
+
+hush
+
+
+
+setcps 0.5
+
+let
+  hola = note (slow 2 "<[c4'min7(6,8,2)]*3 [c4'ninesus4(3,8)]*4>")
+  buenos = note (slow 2 "<[ef3'maj7(6,8,2)]*3 [c4'ninesus4(3,8)]*4>")
+
+d1 $ stack [
+  randcat [hola # s "supersaw" # gain 0.8, buenos # s "superpwm" # gain 0.8]
+, s "clubkick(3,8)"
+, s "~ cp"
+]
+
+d1 $ stack [
+  cat [s "blip(<3 4 5>,<7 9>,<1 2>)" # speed 0.485 # note "<e4'sus2'ii fs4'sus2 bf4'min7 df4'ninesus4>" # gain 0.9 # squiz "<5 10 15>" # hpf (range 50 500 $ slow 8 sine)
+, every 3 (rev) $ fast 2 $ (stutWith 5 (0.5)(|* gain 0.9)) $ s "blip*4" # speed "<0.5 1>" # note (arpg "<e4'sus2'ii fs4'sus2 bf4'min7 df4'ninesus4>") # gain 0.9 # lpf (range 500 10000 $ slow 9 sine)]
+, cat [s "moog(<3 4 5>,<7 9>,<1 2>)" # cut 1 # note "<e fs bf df>" # gain 1 # rel 0.777
+, s "moog*2" # note "bf4 fs4" # cut 1 # gain 1 # rel 0.777]
+, cat [s "clubkick(<3 4 5>,<7 9>,<1 2>)" # speed 0.7 # gain 1
+, s "gabba(<3 5>,8,<0 1>)" # speed 0.8 # gain 0.85 # squiz "2 4 6"]
+, every 3 (stutWith 12 (0.125) ((|* gain 0.9) . (|* size (-0.9))) ) $ s "{~ ~ cp ~}%2" # gain 1.2 # room 0.5 # size 0.7
+]
+
+hush
+
+
+setcps 0.53
+
+d1 $ whenmod 8 7 (# squiz 5) $ every 12 (# lpf 2500) $ stack [every 12 (# gain 0) $
+  every 4 (# crush 6) $
+  whenmod 11 6 ( (slow 1) . (stut 6 (1/8) (0.5)) ) $ slow 2 $
+  note "e4'sus2(3,8,<0 1>) fs4'sus2(<2 5>,8) bf4'min7(6,8) df4'ninesus4(3,8)" #
+  cat [s "<blip arpy sf blip>", s "ul"] #
+  speed 1 #
+  gain (range 0.75 1 $ slow 28.44 $ tri)
+, every 4 (stutWith 3 (1/16) (|* gain 0.9)) $ s "clubkick(3,8)" # gain 1 # speed 0.777
+, every 6 (rev) $
+  every 6 (stutWith 10 (1/16) ((|* gain 0.95) . (|* size 1.1))) $ s "cp(<0 3>,8,<1>)" #
+  gain 1 #
+  size (range 0.5 0.77 $ slow 7.2 sine) #
+  room (range 0.5 0.85 $ slow 6.7 sine) #
+  speed "<0.777 0.65 1.1 0.95>"
+, every 2 (# gain 0) $ fast 2 $ n (run 8) # s "perc" # speed 1.5 # gain 1
+] # lpf 15000
+
+
+
+d1 $ sometimesBy 0.45 ( (# vowel "[e o]") . (# delay 0.75) . (# delaytime 0.333) . (# room (sine)) ) $ s "bd*8" # lpf (2000 * sine) # lpq (0.5)
+
+
+hush
+
+d1 $ whenmod 8 7 (# squiz 5) $ every 12 (# lpf 1500) $ stack [every 12 (# gain 0) $
+  every 4 (# crush 6) $
+  foldEvery [5,6,7] (# accelerate (0.0125)) $
+  whenmod 11 6 ( (slow 1) . (stut 6 (1/8) (0.5)) ) $ slow 2 $
+  note "e4'sus2(3,8,<0 1>) fs4'sus2(<2 5>,8) bf4'min7(6,8) df4'ninesus4(3,8)" #
+  s "supersquare" #
+  accelerate 0 #
+  orbit 1 #
+  legato 0.87 #
+  speed 1 #
+  gain (range 0.8 1 $ slow 28.44 $ tri)
+, every 4 (stutWith 3 (1/16) (|* gain 0.9)) $ s "clubkick(3,8)" # gain 1 # speed 0.777
+, every 6 (rev) $
+  every 6 (stutWith 10 (1/16) ((|* gain 0.95) . (|* size 1.1))) $ s "cp(<0 3>,8,<1>)" #
+  gain 1 #
+  size (range 0.5 0.77 $ slow 7.2 sine) #
+  room (range 0.5 0.85 $ slow 6.7 sine) #
+  speed "<0.777 0.65 1.1 0.95>"
+, every 2 (# gain 0) $ fast 2 $ n (run 8) # s "perc" # speed 1.5 # gain 1
+] # lpf 15000
+
+let
+  pattern1 = note "{10 g4'min7 5 ~ 0 -7 12 -2}%8"
+  pattern2 = note "{2 ~ es4'sus2 3 -7 12 -5}%12"
+  no = const $ s "~"
+  what = const $ stutWith 36 (0.0125) (|* gain 0.99) $ s "cp" # gain 1 # squiz 5
+
+d1 $ someCyclesBy 0.1 what $ stack [
+  cat [
+   no $ pattern1 # s "superpwm" # gain 0.88 # pan (perlinWith (saw*4)*2000) # lpf (range 15000 500 $ slow 8 sine)
+,  no $ pattern2 # s "supersaw" # gain 0.88 # pan (perlinWith (saw*4)*2000) # lpf (range 15000 500 $ slow 6 sine)
+]
+, slow 4 $ plyWith 3 (|* gain 0.9) $ ghost $ s "linnhats*8" # gain 0.9 # speed 0.88 # lpf 7500
+, sometimesBy 0.333 (off 0.33 (+1.8)) $ s "cp(2,4,2)"
+, note "<5(3,4) 3(4,4) 1(3,4)>" # s "bass3" # gain 1
+, s "bd(5,4<0 2>)?"
+]
+
+
+hush
+
+setcps 0.65
+
+d1 $ stack [
+  slow 2 $
+  layer [fast 2, arp "converge", (# speed 0.495)] $
+  note "{~ g3'maj'iii ~ f3'maj7'iii ~ e3'min ~}%2" #
+  s "<808>" #
+  speed 0.484 #
+  gain 0.9 #
+  accelerate 0 #
+  delaytime 0.66 #
+  delay 0.25 #
+  delayfeedback 0.222 #
+  orbit 1
+, s "bd(<5 3>,8)"
+, every 4 (stutWith 2 (0.25) (stutWith 24 (0.125)(|* gain 0.95))) $
+  s "cp/3" #
+  speed (range 1 0.666 $ slow 3.1 perlin) #
+  gain 1 #
+  size 0.4 #
+  room 0.6 #
+  orbit 3
+]
+
+
+hush
+
+
+
+d1 $ stack [
+  slow (choose [4,6]) $ note "{~ ~ ~ c4'maj7 ~ ~}%2" # s "supersquare" # rel 6
+, slow (choose [3,8]) $ note "{c4'maj ~ ~ ~ ~ ~ ~}%2" # s "supersquare" # rel 8
+, s "bd*16?"
+, sometimesBy 0.33 (ghost) $ s "<cp/3 cp/8>"
+]
+
+
+hush
+
+
+
+d1 $ stack [
+  rarely (0.33 <~) $
+  sometimes (0.25 ~>) $
+  plyWith "<5 7 9>" (|* gain 0.95) $
+  n (run 4) #
+  s "<can bubble>" #
+    gain (choose [1, 0.75, 0.666]) #
+    speed (choose [0.75, 1, 1.25, 1.5])
+, s "bd(<3 5>,8,<1 2>)?"
+, sometimesBy 0.33 (stutWith 5 (0.125) ((id) . (# room 0.9) . (# size 0.9))) $
+  s "cp(1,8,3)?"
+, slow 3 $ note "{~ ~ ~ ab4'maj7 ~ ~ 7 12 ~ c4'ninesus4}%1" #
+  s "808" #
+    speed 0.484 #
+    crush 6 #
+    room 1 #
+    size 1
+]
+
+hush
+
+d1 $ stack [
+  superimpose (/ (plyWith 3 (|* note "{c4'min7 c4'ninesus4}%2") (legato "0.2 0.3 0.4"))) $
+  note "<c4'ninesus4 c3'min7>" #
+  s "<supersquare superpwm>" #
+  legato 0.5 #
+  gain 0.5
+, s "bd(<16 6>,8)?"
+, sometimesBy 0.333 (stutWith 2 (0.333) (id)) $ s "cp(1,8,3)"
+]
+
+
+
+
+
+hush
+
+d1 $ stack [
+  slow (choose [8,12]) $ striateBy 32 (1/25) $ s "blood(<2 3>,<8 7>,<0 1>)" # speed (choose [0.5,1,0.75]) # gain 0
+, slow 3 $ note "c4'min7" # s "blood:5(3,8)" # rel 0.7
+, s "~ blood:2" # speed (choose [1, 1.5, 0.5]) # room 0.8 # size 0.5 # gain 0.95
+, s "blood:3*2?" # gain 0
+]
+
+d1 $ slow 2 $ note "{-2 d4'min7 5 -5 7}%7" # s "blood:7" # accelerate 0 # size 0.5 # room 0.9 # gain 0.89
+
+
+
+do
+{
+  resetCycles;
+  d1 $ seqP [
+  (0, 12, stack [every 6 ((slow 3) . (# accelerate "-0.125")) $
+  slow 2 $ note "<c4*32 f3*8 f4*15 c3*17 c5(5,7) f3(2,7)>" # s "eternal" # cut 1 # begin "<0.8 0.7 0.5 0.65 0.77>" # speed "<0.5 0.75>" # gain 1 # accelerate 0
+, s "eternal:7(5,8)" # rel 0.6 # speed 0.5 # gain 1
+, s "eternal:8(5,8,1)" # rel 0.5 # speed 0.5 # gain 1
+, every 7 (const $ s "cpu8*24") $ cat [s "cpu8*16?", s "cpu8(3,8,<1 2>)"] # gain "<1.2 1 0.9>"
+, cat [s "~ cpu8:2", "cpu8:3(5,8,3)?"] # lpf (range 500 15000 $ slow 4 sine) # gain 1.2
+]),
+  (4, 12, stack [s "eternal:5(5,8)" # rel 0.6 # speed 1 # gain 1
+, s "eternal:4(5,8,1)" # rel 0.5 # speed 1 # gain 1
+])
+]
+}
+
+
+let
+  pat = note "{0@5 -3@25 -5@20 0@14 7@15 11@2 0@50}%24"
+
+d1 $ stack [ someCyclesBy 0.33 (stutWith 8 (1/16) (|* gain 0.9))
+  $ slow 8 $ pat # s "[eternal:2, eternal]"
+    # speed 0.5
+    # legato 1
+    # waveloss "20 66.6 80 10"
+, sometimes (stutWith 3 (2/3) (id)) $ slow 4 $ s "cpu8:03(3,16,2)"
+, slow 2 $ s "cpu8:8(5,8)?"
+]
+
+
+hush
+
+
+d1 $ (# cps "<0.65>") $ stack [
+  struct (binaryN 16 "<75214 41257 90057>") $ s "<chute chute:6>" # speed (choose[0.5,1]) # legato (range 0.25 1.5 $ slow 5.1 sine) # gain 1
+, s "cpu8(<3 5>,8,<1 2 5>)" # gain 0
+]
+
+d1 $ slow 2 $ someCyclesBy 0.33 ((0.125 ~>) . (stutWith "<5 6 7>" (1/16) ((|* gain 0.89).(|* legato 0.9)))) $ struct (ascii "<s t r u c t>") $ note "<c5'min7 c5'ninesus4 af4'maj7 bf4'11>" # s "got" # legato 1
+
+
+do
+{
+  resetCycles;
+  d1 $ seqP [
+    (0, 12, stack [
+      s "chute*8" # legato 0.5
+    , s "cpu8(3,8)"
+    ]),
+    (4, 6, s "chute:2*16"),
+    (12,24, stack [
+      s "chute*40" # legato (range 0.1 0.9 $ slow 4 sine)
+    , s "cpu8(5,8)"
+    , s "~ cpu8:2"])
+  ]
+}
+
+
+
+hush
+
+setcps 0.90
+
+d1 $ stack [
+  note "c3'sus2(<5 3>,8,<0 1>)" # s "trellis:1" # speed 0.75 # legato "<1.5 2.5>" # accelerate 0.25
+, foldEvery [4,5,6] (# gain 0.9) $ s "~ chute:3" # speed 1.25 # rel 0.125 # gain 1
+, every 6 (stutWith 32 (1/24) (|* gain 0.9) ) $ s "cpu9:2(1,8,3)" # gain 1
+, foldEvery [9,10] (const $ s "cpu8*4" # gain 1) $ s "cpu9(5,8)?" # gain 1
+, randcat [s "cpu9:6*4?", s "cpu9:6*8?", "cpu9:3(3,8)"] # gain (range 0.65 1 $ slow 3.1 rand) # rel (range 1 0.125 $ slow 4 sine) # gain 1
+]
+
+
+d1 $ slow 2 $ note "<c5'sus2(7,11) af4'maj7(6,4)>" # s "rivulets:2" # legato 1
+
+
+
+d1 $ s "cpu8:7" # cps 0.65
+
+hush
+
+d1 $ (# cps (range 0.65 1 $ slow 24 tri)) $ stack [
+  someCyclesBy 0.33 (  plyWith "<4 8 12 8 4 2>" (|* gain 0.88) . (|* accelerate (-0.125)) . (|* squiz "5 10 15 20") ) $
+  note "{c3'ninesus4@8 0@4 -7*4@6 3*16@8 c4'min7@12}%8" #
+  s "cpu8:7" #
+  speed 0.484
+, slow 4 $ s "[cpu8*8?, cpu8:4*8?]"
+, (0.25 ~>) $ s "imp/2"
+]
+
+setcps 0.65
+
+d1 $ stack [
+  someCyclesBy 0.33 (plyWith "<5 10 8>" (|* gain 0.9) . (|* squiz "5 10 15 20") . (|* accelerate (-0.1625))) $
+  note "{g3'maj7(3,8)?@16 d3'maj'iii(3,8)?@16 a3'maj'ii@8 b3'min7'ii@4 b3'ninesus4(3,8)?@8}%16" #
+  s "<cpu8:7>" #
+  speed "<0.484>" #
+  gain "<0 1 0 1 1 0 0>" #
+  lpf (range 1500 5000 $ slow 8 sine)
+, s "cpu8*4?"
+, cat [s "cpu8:1(2,8,<2 3>)", s "cpu8:4*8?", "cpu8:2(3,8)?", "cpu9:5*8?"]
+]
+
+d1 $ stack [
+  every 4 (stutWith 6 (1/16) (|* speed 1.2) ) $ slow 4 $ struct (ascii "a b") $ s "cpu9" # pan (rand) # speed 1
+, (0.5 ~>) $ s "ppad*8?" # speed 1 # legato 0.5 # pan (rand) # gain "<0 1 1 0 0>"
+]
+
+setcps 0.65
+
+hush
+
+
+
+d1 $ stack [
+  every 12 (striateBy "<12 24 48>" (1/10)) $ s "latibro(<3 5>,12,<0 0 1>)" # speed "<0.5>" # gain "<0.9 1 0.8 1 0>"
+, cat [s "bd*12?", s "less*3"]
+, (0.5 ~>) $ every 3 (stutWith 48 (1/48) (|* gain 0.9) ) $ every 7 (struct "t*12?") $ s "cp" # lpf 2500 # gain 1
+, struct ("<t*16 t*17 t*18>") $ "[hh, hh:3]" # crush (range 7 3 $ slow 12 sine) # gain 1
+, note "{0 0 5*4@4 0@4 -2 12 14}%4" # s "jvbass"
+]
+
+
+d1 $ stack [
+  slow (range 2.2 3.3 $ slow 4.44 sine) $ s "bev(<7 5>,8)" # speed "<0.5 0.75>" # begin (range 0.2 0.3 $ slow 2.1 sine) # legato 2 # gain 1.2
+, ("<0.11 0.125>" ~>) $ plyWith "<4 5 6 7>" (|* gain 0.9) $ note "{0*6@2 12/2 -12*3@2 4*4@3 5*5@3}%3" # s "[v|arpy]" # speed 0.5 # crush (range 7 4 $ slow 6 sine) # lpf 2500 # gain 0.94
+]
+
+hush
+
+
+
+d1 $ stack [
+  whenmod 8 4 ((jux rev) . (stut 3 (2/3)(0.5))) $ s "yeah*16?" # n (irand 100) # speed (range 0.5 1 $ slow 4 rand) # gain 1
+, every 3 (stut 4 (1/16) (0.5)) $ s "bd(<7 5>,8)?" # gain 1
+, append (s "cp(6,8,7)?") (note "<0(5,8,2)? -2/2>" # s "moog" # speed 1 # legato 1 # gain 1)
+, someCyclesBy 0.33 (ply 1) $ note "{c4'min7@8 c4'ninesus4(7,8,2)?@8 ~ ~ 12*4}%4" # s "supersquare" # gain 0.666 # legato 1
+]
+
+d1 $ slow 5 $ n (run 21) # s "stab" # gain 0.9
+
+
+d1 $ s "stab:17"
+
+
+
+d1 $ stack [
+  s "stab*8?" # gain 1.1 # speed 1.33 # legato 0.7
+, s "bd(<3 4 5>,8)?"
+, every 6 (stutWith 4 (1/16) (|* rel 1.625)) $ s "ul:7" # rel 0.7 # gain 1
+, someCycles (plyWith "<24 18 12>" ((|* legato 0.97) . (|* crush 0.98) . (|* gain 0.99))) $ s "trump:10" # legato (range 1 2 $ slow 2 sine) # crush 6 # speed 0.484 # gain (choose [1])
+]
+
+hush
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+setcps 0.65
+
+
+d1 $ (# cps (range 0.5 1 $ slow 8.8 sine)) $ stack [
+  s "bd*16?" # gain 0.88
+, every 6 (stutWith 10 (1/16) ((|* squiz "<2 4 6 8>") . (|* gain 0.9))) $
+  s "~ cp(<3 5>,8,3)?" # gain 0.88
+, someCyclesBy 0.33 ((striateBy 4 (1/24) . (jux rev))) $
+  every 4 (plyWith 3 ((|* crush 0.9) . (|* legato 0.9))) $
+  chop "<16 8>" $
+  s "bev" #
+  crush 8 #
+  legato 1 #
+  speed (choose [0.75, 1, 1.25]) #
+  gain "<0.88 1.11 0.77 0.99>" #
+  hpf (range 66 666 $ slow 6.66 tri)
+]
+
+
+
+
+
+
+
+hush
+
+
+
+
+d1 $ stack [
+  someCyclesBy 0.33 (stutWith 10 (0.0625)(|* legato 0.8)) $
+  note (arp "down" "<c4'min7*4 df4'maj7*4>") #
+  s "superchip" #
+  legato 0.66 #
+  gain (wchoose [(1,0.66),(0,0.33)])
+, destabilize $ stutWith 24 (1/32)((|* rel 0.9).(|* squiz 5)) $
+  note "<c4'min7 c4'ninesus4 df4'maj7>" #
+  s "supersquare" #
+  rel 0.7 #
+  gain (wchoose [(1,0.33),(0,0.66)])
+, s "electro1*16"
+, s "bd*8?"
+, s "cp"
+]
+
+
+
+hush
+
+setcps 0.65
+
+d1 $ stack [
+  someCyclesBy 0.33 (slow 3 . stutWith 11 (1/32) (|* gain 0.88).(|* legato 0.77)) $ struct ("t*5?)") $
+  note "[g4'maj7|fs4'min7|d4'maj]" #
+  s "[supersaw|superchip]" #
+  legato 1 #
+  gain 0.77
+, every 4 (slow 3 . stutWith 10 (1/24) (|* gain 0.9)) $
+  struct ("<t*11 f*3 t*22>") $
+  s "linnhats" #
+  gain 0.77
+, s "cp(2,7,3)?"
+, s "bd(9,7)?"
+ ]
+
+
+ d1 $ stack [
+  someCyclesBy 0.33 (jux (off 0.0625 ((|* gain 0.7) . (# note "d5'maj7")))) $
+  note "{d4'maj7(5,7)@3 -22(3,7)@3 -18*3@2}%5" #
+  s "[supersaw|supersquare]" #
+  legato 1 #
+  gain "<0.88 0.66 0.44>"
+, every 4 (slow 3 . stutWith 10 (1/24) (|* gain 0.9)) $
+  struct ("<t*11 f*3 t*22>") $
+  s "linnhats" #
+  gain 0.77
+, s "cp(2,7,3)?"
+, s "bd(9,7)?"
+]
+
+hush
+
+d1 $ (# cps (range 0.66 0.69 $ slow 6.66 perlin)) $ stack [
+  someCycles (plyWith "<5 10 15>" (|* gain 0.8).(|* lpf 1.05).(|* room 1.05)) $
+  repeatCycles 4 $
+  chunk 4 ((# speed (range 0.5 1 $ slow 4.44 sine)).(# gain 0.8)) $
+  s "{linnhats*4@5, bd*4@5}%7" #
+  n (irand 100) #
+  lpf 1500 #
+  room 0.33
+, someCycles (slow 4 . stutWith "<10>" (1/24) (|* squiz 2)) $ note "{0@10 -3@10}%3.5" #
+  s "[casio|casio:1|casio:2]" #
+  speed 0.5 #
+  lpf 888 #
+  room 0.88
+, someCyclesBy 0.22 (# gain 0.77) $ note "{c3'ninesus4@2}%7" # s "casio:1" # speed 0.5 # gain 0
+]
+
+
+
+hush
+
+do
+  let pA = note "c6'maj7(6,4)"
+      pB = mute $ note "<a5'min7(6,4)? 21*16? d5'min7(7,8)>"
+  d1 $ slow 2 $ stack [
+      someCyclesBy 0.22 (stutWith 2 (1/13) id) $
+      s "bd(8,7)"
+    , pA #
+    s "moog" #
+    gain (range 0.77 0.55 $ slow 12.22 sine) #
+    legato (range 0.11 0.99 $ slow 12.22 sine)
+    , s "hh*17" #
+    gain (range 0.77 0.55 $ slow 6.66 perlin) #
+    speed 0.4 #
+    crush 5 #
+    room 0.666 #
+    orbit 3
+    ]
+
+hush
+
+d1 $ cA "e" # s "arpy"
+
+d1 $ s "arpy"
+
+d1 $
+  slow 2 $
+  stack [
+    stutWith 12 (1/24)((|* gain 0.91).(|* squiz 1.125).(# accelerate (-0.0625))) $
+    note "<ef4'maj7(3,8) f4'9sus4(2,8,3) ef4'maj7(5,2,2)? bf3'min7(4,3)?>" #
+    s "casio:1" #
+    speed 0.25 #
+    legato 1 #
+    gain 0.77
+, s "{bd*5@3.5 ~ bd*7@3.5}%8" #
+    lpf (range 750 5000 $ slow 6.66 sine) #
+    speed (range 0.625 0.777 $ slow 5.55 sine)
+]
+
+d1 $ stack [
+  note (arp "down" "<ef3'maj7'21(1,3) f4'9sus4'21 ef3'maj7'21 bf3'min7'21(1,3)>") #
+  s "casio:1" #
+  speed 0.25 #
+  gain 0.77
+]
+
+
+hush
+
+do
+  let
+      pat = binaryN 16 "{30333 40444 50555 55505 44404 33303}%1"
+      outsideIn = struct pat
+      insideOut = struct (inv pat)
+  d1 $ every 24 (const $ stack [s "gabba", chop 16 $ s "feelfx:1", note (arp "down" "a2'min7'16") # s "supertron" # legato 0.8 # gain 0.55]) $
+      whenmod 12 5 (jux rev . iter 8) $
+      slow 2 $ stack [
+      someCycles (chop 8) $ slow 4 $ outsideIn $ note "c3 a3 a2 f3" # s "juno:1" # legato 1 # gain "<0 0 0.9 0.9 0 0.9 0.9 0.9 0 0>"
+      , slow 2 $ outsideIn $ s "[[bd,gretsch:10]|[clubkick,bass3]|[bleep:1,gretsch:1]]"
+      , someCyclesBy 0.55 (stutWith "<6 3>" (1/32) (|* room 0.985).(|* gain 0.88)) $
+      slow (range 2 2.005 $ slow 7.77 sine) $
+      insideOut $
+      sometimes (# speed 0.75) $ s "[[click,gretsch:18]|cp|blue:1|flick:4]" # legato 1 #
+      size 0.9 #
+      room 0.5 #
+      orbit 3
+      , s "birds" # gain 0.6
+      ]
+
+
+hush
+
+do
+  let
+     pat = (binaryN 16 "73106 73107")
+     gh = struct pat
+     hg = struct (inv pat)
+  d1 $ slow 3 $ whenmod 12 5 (iter 4) $ stack [
+      hg $ s "[bd|clubkick|can]" # gain 0.88
+    , someCyclesBy 0.33 (stutWith 12 (1/32) (|* gain 0.9)) $ degradeBy 0.77 $ gh $ s "[flick:8|flick:10]"
+    , trunc 0.75 $ hg $ s "[linnhats]"
+    , every 2 (plyWith "<2 4>" ((# speed 1.5).(# lpf 5000))) $ trunc 0.75 $ hg $ s "[fm:14]" # legato 1.25 # coarse 8 # speed ("<1 0.75 0.5 0.75 1>") # note (-3)
+    , someCyclesBy 0.44 (stripe 2) $ s "linnhats*32" # speed 0.5 # rel 0.1 # gain 0.66
+    , trunc 0.25 $ gh $ s "bass1:3" # note "<9 7 5 4 2>" # gain 0.9
+    ]
+
+
+
+
+
+
+footnote " why is it so hard to accept change "
+
+hush
+
+do
+  let
+    pA = note "{ ~ ef3'maj7'5@3 }%4"
+    pB = note "{ ~ f3'9sus4'5@5 }%4"
+    pC = note "{ ~ f3'min7'5@7  }%4"
+    pD = note "{ ~ bf3'min7'5@7 }%4"
+    pE p = struct ("{t*2@3 [t(<4 7>,5)]@3}%2") p
+  d1 $ mute $ (# lpf (range 1500 2500 $ slow 11.11 perlin)) $
+    stack [
+      repeatCycles 16 $
+      someCycles (chop 24) $
+      cat [pA,pB,pC] #
+      dek (choose[1,5]) 1
+    , slow 1.11 $ note (arp "down" "<ef3'maj7'21(1,3) f4'9sus4'21 ef3'maj7'21 bf3'min7'21(1,3)>") #
+      dek 2 1 #
+      orbit 6 #
+      delay 0.33 # delaytime 0.33 # delayfeedback 0.66 #
+      gain "<0.44 0 0.66 0.77 0 0.22 0.33 0 0.66>"
+    , someCycles (ply 2) $
+      struct ("{t f@3}%4") $
+      note "c1" #
+      dek 1 1
+    , someCyclesBy 0.33 (slow 1.25 . stutWith 8 (1/32)(|* gain 0.9)) $
+      destabilizeBy 0.011 $
+      struct ("{t f@3}%4") $
+      note "d1" #
+      dek 1 1
+    ] # cps (160/60/4)
+  d2 $ mute $ stack [
+        repeatCycles 4 $
+        pE $
+        note "<ef2 f3 bf2>" #
+        dek 5 0.5
+    , someCycles ((stutWith 6 (1/24) (|* gain 0.89))) $
+        repeatCycles 4 $
+        pE $
+        note "e1" #
+        dek 1 1
+    , note "c1*12?" #
+      dek 1 1
+    , destabilizeBy 0.011 $ every 4 (stutWith 24 (1/32) (|* gain 0.97)) $
+        note "d1" #
+        dek 1 1
+    ] # cps (160/60/4)
+  d3 $ mute $ stack [
+      slow 2 $
+        chop 12 $
+        chunk 4 ((# detune 0.55).(|* leslie 1.125).(# note (arp "<up down updown>" "bf2'7sus4'8")).(# gain 0.44)) $
+        note "<bf2'min7 -14*4>" #
+        dek 3 1 #
+        waveloss "<0.66 0.77 0.55 0.44>" #
+        leslie (range 0 0.55 $ slow 6.66 sine) #
+        orbit 3
+    , slow 12 $
+        note "gf3 bf3 gf2" #
+        dek 2 1
+    , destabilizeBy (range 0 0.11 $ slow 7.77 sine) $ slow 2 $
+        note "[[c1*12 c1*2], ~ ~ d1]" #
+        dek 1 1
+    ] # cps (160/60/4)
+  d4 $ slow 3 $ whenmod 10 4 (slow 3).(iter 4).(chop 4) $
+      stack [
+        someCyclesBy 0.33 (jux rev) $ slow 2 . stutWith "<6 8 12>" (1/24)(|* legato 0.66).(|* gain 0.66).(|* lpf 0.8) $
+        note "{0*2@4 -2*2@2, ~ -10*4@6 5*4@6 9*4@6}%6" #
+        dek 2 0.8
+    , note "<c3'min7(<1 3>,8) c4'9sus4(<1 5>,8) f3'maj7(<1 3>,8) g4'7sus2(<1 5>,8)>" #
+        dek 3 1
+    , note "c1*4" #
+        dek 1 1
+    , someCyclesBy 0.22 (plyWith 4 (|* squiz 1.25)) $
+        destabilizeBy (range 0 0.11 $ slow 4 sine) $
+        note "~ d1" #
+        dek 1 1 #
+        squiz "<2 5 10>"
+    ] # cps (160/60/4)
+
+
+hush
+
+d1 $ stack [
+  someCyclesBy 0.33 ((linger 1) . (# crush (range 10 4 $ slow 2 sine))) $ someCyclesBy 0.44 (rev . off "<0.0625 0.125 0.25>" ((|* gain 0.77).(|* accelerate 0.01625))) $
+    note (arp "down" "<ef3'maj7'16 f3'9sus4'16 ef3'maj7'16 ef3'7sus2'16 bf3'min7'16 bf3'9sus4'16>") #
+    dek 3 1
+  , every 4 (rip 0.1625 0.8) $
+    note "c1(5,8)? d1" #
+    dek 1 1
+  ] # cps (160/60/4)
+
+
+hush
+
+d1 $ stack [
+  every 4 (chunk 4 (# note (arp "<updown/6 down*4>" "<c3'min7'8 c3'ninesus4'12 f3'maj7'8 g3'7sus2'12>"))) $
+    note "{0*2 -2*4 -10/2, -2 9}" #
+    dek (choose [1,5]) 1
+  , note "c5" #
+    dek 2 1
+  ] # cps (160/60/4)
+
+
+hush
+
+d1 $ whenmod 10 4 (slow 3).(iter 4).(chop 4) $
+    stack [
+      someCyclesBy 0.33 (jux rev) $ slow 2 . stutWith "<6 8 12>" (1/24)(|* legato 0.66).(|* gain 0.66).(|* lpf 0.8) $
+      note "{-2*2@4 -4*2@2, ~ -12*4@6 3*4@6 7*4@6}%6" #
+      dek 2 0.8
+  , note "<bf3'min7(<1 3>,8) bf4'9sus4(<1 5>,8) ef3'maj7(<1 3>,8) f4'7sus2(<1 5>,8)>" #
+      dek 2 1
+  , note "c1*4" #
+      dek 1 1
+  , someCyclesBy 0.22 (plyWith 4 (|* squiz 1.25)) $
+      destabilizeBy (range 0 0.11 $ slow 4 sine) $
+      note "~ d1" #
+      dek 1 1 #
+      squiz "<2 5 10>"
+  ] # cps (160/60/4)
+
+
+d1 $ note "<bf3'min7(<1 3>,8) bf4'9sus4(<1 5>,8) ef3'maj7(<1 3>,8) f4'7sus2(<1 5>,8) f4'7sus4>" #
+  dek 2 1
+
+d1 $ note "<bf3'min7 bf4'9sus4 ef3'maj7 f4'7sus2 f4'7sus4>" #
+  dek 2 1
+
+
+d1 $ slow 2 $
+stack [
+  slow 2 $
+  every 2 (slow 3 . jux rev . iter 4 . chop 4) $
+  stutWith "<4 8 12>" (1/24)((|* legato 0.92).(|* gain 0.92).(# squiz "<2 4 6 8>")) $
+  note (arp "<updown>" "<f3'7sus4'16 ef3'maj7'16 f3'min7'16 ef3'maj7'16 c3'min7'16 c3'ninesus4'16 bf3'maj'16>") #
+  dek 2 1
+, note "c1*16?" #
+  dek 1 1
+, note "~ d1" #
+  dek 1 1
+] # cps (160/60/4)
+
+
+hush
+
+do
+  let
+      pat = "{~ 0/2 1 0 ~ 1 1/2 0 ~}%8"
+      inverse 1 = 0
+      inverse 0 = 1
+  d1 $ someCycles (rip 0.0625 0.8) $ whenmod 10 4 (slow 2 . jux rev) $ iter 8 $
+      stack [
+        someCyclesBy 0.44 (plyWith 4 (|* speed 1.0625)) $
+          gain pat #
+          note "d1" #
+          dek 1 1
+      , someCyclesBy 0.55 (stutWith 3 (1/16) (|* gain 0.94)) $
+          gain (inverse <$> pat) #
+          note "c1" #
+          dek 1 1
+      , someCyclesBy 0.33 (chop 8) $
+          cat [(0.125 ~>) $
+          note (pat - 10), gain (inverse <$> pat), note "c3'9sus4(3,8)"] #
+          dek 3 1 #
+          squiz (range 0 10 $ slow 20.02 perlin) #
+          speed 0.484 #
+          legato (range 0.44 0.99 $ slow 5.55 sine) #
+          room 0.22 #
+          size (range 0.22 0.44 $ slow 6.66 tri)
+      , someCyclesBy 0.66 (fast 2) $ struct (binaryN 16 "60666") $
+          note "ds1" #
+          dek 1 1 #
+          lpf (range 500 10000 $ slow 8.08 sine)
+      , fix (# accelerate (-1))(note "12") $ note "<0(<1 3 5>,8,<4 2 0>) 12*16? 24*16?>" #
+          dek 2 (range 0.99 0.55 $ slow 4.44 sine) #
+          gain "<0.88 0 0.77 0 0.66 0 0.55>"
+      ] # cps (160/60/4)
+
+
+hush
+
+d1 $ whenmod 10 8 (slow 2 . jux rev . iter 4) $
+stack [
+  someCyclesBy 0.66 (slow 2 . chop 4 . chunk 4 (# note (arp "updown" "<~ c3'sus2'12 ~ g3'6by9'12>")).(# gain 0.44)) $
+    fast 2 $
+    fix (# room 0.22) (note "c4'sus2") $
+    note ("<c4'sus4(3,8) c4'sus2 g4'6by9(<1 3>,8,<2 0>) d4'min7>") #
+    dek 3 1
+  , note "~ c1(<5 3>,8)?" #
+    dek 1 1
+  , note "d1" #
+    dek 1 1
+] # cps (160/60/4)
+
+
+hush
+
+d1 $ stack [
+  note ("<c5'maj*2 f3'maj d5'min7 c5'maj>") #
+  dek 3 1
+, every 2 (rot "<0 1 2 3>") $
+  whenmod 10 4 (iter 8) $
+  sometimes (stutWith 2 (1/16)(|* gain 0.8)) $
+  note ("{0/3 4*3@3 5 7*2@4}%8") #
+  dek 2 1
+] # cps (160/60/4)
+
+
+hush
+
+do
+  let
+      pat = binaryN 16 "{1111 333 ~ 30333 33303 ~ 666 2222}%1"
+      outsideIn = struct pat
+      insideOut = struct (inv pat)
+  d1 $ every 12 (const $ stack [
+      note "c1" #
+      dek 1 1
+    , chop 12 $
+      note "c5" #
+      dek 6 1
+    , note (arp "updown" "bf2'6by9'16") #
+      dek 2 1 #
+      detune 1.11 # gain 0.66 # orbit 7 # room 0.66 # size 0.33 # delay 0.66 # delaytime 0.33 # delayfeedback 0.33]) $
+    slow 2 $
+    whenmod 12 5 (iter 4) $ every 28 (linger 0.11) $ degradeBy 0.11 $
+    stack [
+      slow 4 $
+        chop 6 $
+        outsideIn $
+        note "<c4'min7 g3'min7 [g3'min7'ii, af3] bf3'maj'4 df3'maj7 af3'maj7>" #
+        dek 2 1 #
+        detune 0.99 #
+        legato (range 1.5 2.5 $ slow 2 sine)
+    , insideOut $
+        stack [
+          note "c1" #
+          dek 1 1
+        , trunc (0.25) $ note "e1" #
+          dek 1 1
+        , note "cs1" #
+          dek 1 1
+        ] # crush (range 11.11 6.66 $ slow 6.66 perlin)
+    , insideOut $
+        note "<af2 bf3 g2 g3>" #
+        dek 5 1
+    , someCycles (slow 1.11.plyWith 3 (|* gain 0.88)) $
+        note "d1" #
+        dek 1 1 #
+        squiz "0 1 4 6 9"
+    ]
+  d2 $ stack [someCyclesBy 0.33 ((0.11 ~>) . plyWith 2 (# speed 0.77)) $ note "cs1*2" # dek 1 1]
+
+
+hush
+
+do
+  let
+      pat = (binaryN 16 "<66606 30333>")
+      x = struct (pat)
+      y = struct (inv pat)
+  d1 $ stack[
+    someCyclesBy 0.44 (trunc 0.25) $
+      someCycles (slow 2.chop 3) $
+      slow 6 $
+      y $
+      note "<bf4'min7 f4'min7>" #
+      dek 2 (range 0.5 2.5 $ slow 23 sine)
+    , someCyclesBy 0.33 (slow 4.plyWith 4 (|* accelerate (-0.066)).(|* gain 0.88)) $
+      slow 2 $
+      x $
+      note (arp "<up downup updown up>" "<bf3'9sus4'16 af3'6by9'16>") #
+      dek 3 (range 3.5 0.5 $ slow 24 sine)
+    , degradeBy 0.11 $
+      trunc "<0.125 0.25 0.5>" $
+      y $
+      note "[c1|d1]" #
+      dek 1 1
+    , degradeBy 0.55 $
+      slow 2 $
+      x $
+      note "<bf2 f2>" #
+      dek 5 1
+    , chop "<1 2 3 4>" $ slice 4 "<[0 1 2] [2 3 0] [1 3 4*2]>" $
+      note "c3" #
+      dek 7 1
+    ] # cps (160/60/4)
+
+
+hush
+
+do
+  let
+      pat = (binaryN 16 "73106")
+      gh = struct (pat)
+      hg = struct (inv pat)
+  d1 $ stack [
+      whenmod 10 4 (jux rev . iter 2) $
+      slow 5 $
+      note "{[bf3'min7, [0|-12]] [-11*5 [12|24|22] -9 -2*2] [-9,f3'min7]@2}%4" #
+      dek 2 0.25
+    , slow 3 $
+      gh $
+      note "c1" #
+      dek 1 1
+    , someCyclesBy 0.22 (slow 2) $
+      trunc 0.25 $
+      slow "<1 2 3>" $
+      hg $
+      note "d1" #
+      dek 1 1
+    , mute $ chop "<1 2 3 4>" $ slice 4 "<[0 1 2] [2 3 0] [1 3 4*2]>" $
+      note "cs3" #
+      dek 7 1
+    ] # cps (160/60/4)
+
+
+hush
+
+do
+  let
+      pA = (binaryN 16 "<60606 30303 66606 33303>")
+      gh = struct (pA)
+      hg = struct (inv pA)
+      pB = ("t(5,8)")
+      ty = struct (pB)
+      yt = struct (inv pB)
+  d1 $ stack [
+      slow 8 $ stack [
+      note "[[bf4|af4],f3,[d3|ef3]]",
+        gain "1*8" # ccv (range 0 127 $ slow 7.77 perlin) # ccn 1,
+        gain "1*8" # ccv (range 0 127 $ slow 4.44 sine) # ccn 2] #
+      dek 4 6 # gain (range 0.77 1 $ slow 20 sine)
+    , whenmod 12 5 ((0.0125 ~>) . slow 2 . jux rev . iter 4) $
+      someCyclesBy 0.44 (slow 2 . chop 2) $
+      yt $
+      note "<bf4'min7 bf3'9sus4 f4'min7 af3'6by9>" #
+      dek 2 1 # gain "<1 1 1 0 0 1 1 0 1 0 1 1 1 0 1 1 0>"
+    , slow "<1 2 3>" $
+      note (arp "down" "<bf4'min7'16 bf3'9sus4'16 f4'min7'16 af3'6by9'16>") #
+      dek 3 5 #
+      gain "<0 1 1 0 0 0 1 0 1 1 1 0 0 0 1 1>"
+    , slow 2 $
+      hg $
+      note "c1" #
+      dek 1 1
+    , note "cs1*4" #
+      dek 1 1
+    , slow 2 $
+      trunc (range 0.22 0.66 $ slow 4.44 saw) $
+      sometimes (slow 2) $
+      gh $
+      note "<bf1 f2>" #
+      dek 5 1
+    , someCyclesBy 0.44 (slow 2 . stutWith "<6 12>" (1/36)(|* gain 0.94)) $
+      slow 2 $
+      slice 8 "<[0 1] [2 3] [7 6]>" $
+      loopAt 4 $
+      note "ds3" #
+      dek 7 1
+    ] # cps (160/60/4)
+
+
+
+do
+  let pat = (binaryN 16 88808)
+      gh = struct (pat)
+      hg = struct (inv pat)
+  d1 $ stack [
+        mute $
+        whenmod 12 5 (iter 4) $
+        slow "<1 2 3>" $
+        someCyclesBy 0.66 (inside (segment 4 $ range 0.5 2 $ slow 11.11 sine) (struct "t(<5 7 9 11>,8)")) $
+        stutWith 6 (0.125)(|* gain 0.95) $
+        note (arp "<down updown up downup>" "<bf4'min7'16 bf4'ninesus4'16 f4'min7'16 af3'6by9'16>") #
+        dek 2 1.5 #
+        gain 0.4
+      , slow 2 $
+        gh $
+        stack [note "c1", ccv (range 0 127 $ slow 4 sine) # ccn 3] #
+        dek 1 1
+      , whenmod 10 4 (trunc (0.5)) $ destabilizeBy 0.01625 $ slow 2 $
+        gh $
+        stack [
+          note "cs1",
+          ccv (range 0 127 $ slow 4 sine) #
+          ccn 3] # dek 1 1
+      , slow 3 $
+        hg $
+        stack [
+          note "d1",
+          ccv (range 0 127 $ slow 4 sine) #
+          ccn 3] # dek 1 1
+      , slow 2 $
+        gh $
+        stack [note "<bf2 [~ bf2 bf3] f2 af2>"] # dek 5 2.22
+      , slow "<1 1 1 2>" $ struct ("{t*4@5 t@15}%2") $ note "e3" # dek 7 1
+      ] # cps (160/60/4)
+
+
+hush
+
+d1 $ stack [
+  stack [note "[[bf4|bf5|d6*2], f4, ef5*5]",
+    gain "1*8" # ccv (range 0 127 $ slow 7.77 perlin) # ccn 1,
+    gain "1*8" # ccv (range 0 127 $ slow 4.44 sine) # ccn 2] # dek 4 6 # gain (range 0.77 1 $ slow 20 sine)
+, slow 8 $ someCyclesBy 0.22 (off 0.0111 (jux rev . iter 2)) $ slow 3 $ note "{d3*8@2}%4" # dek 7 1
+, someCyclesBy 0.11 (off 0.0111 id) $ note "ds3/2" # dek 7 1
+, slow 4 $ stack [
+    struct (ascii "t i d a l") $ note "[c1|cs1]",
+    gain "1*8" # ccv (choose [0,127]) # ccn 3] # dek 1 1
+, slow 8 $ trunc ("<0.25 0.5 0.75>") $ struct (ascii "t i d a l") $ note "<ef2 bf1(7,8) f2>" # dek 5 1 # gain 1
+] # cps (160/60/4)
+
+
+do
+  let pat = (binaryN 16 11011)
+      xy = struct (pat)
+      yx = struct (inv pat)
+  d1 $ stack [
+      someCyclesBy 0.44 (stutWith 2 (35/36) id) $ slow 4 $ xy $ note "c1" # dek 1 1
+    , someCyclesBy 0.22 (iter 2 . bite 4 "<[0 3*2] [1 2*4] [3 1*4]>") $
+      someCyclesBy 0.33 (slow 3 . rev . stutWith "<2 4 6>" (1/48)(|* legato 0.93)) $
+      slow 4 $
+      yx $
+      note "<bf3'min7 b2'6by9'ii fs4'maj9(6,7) af3'6by9 f4'min7>" #
+      dek 3 1.77
+    ]
+
+
+
+
+--new 05.09.20
+d1 $ whenmod 12 5 (iter 2) $ stack [
+  slow "<4 6 8>" $
+  struct ("t(<11 13 15>,16,<0 3 1 2>)") $
+  note "<bf'min7 b'6by9'iii fs'maj7>" #
+  s "[superzow|supertron]" #
+  legato (range 0.25 1.5 $ slow 11.11 sine) #
+  gain 0.55 #
+  octave "<3 4>"
+, mute $ slow 3 $
+  someCyclesBy 0.88 (slow 2 . chop 3) $
+  someCyclesBy 0.66 (struct "t*4" . off 0.011 (slow 2.22 . someCyclesBy 0.55 (jux rev . stripe 2))) $
+  note (arp "downup" "<bf'min7'16 b'6by9'14 fs'maj7'8>") #
+  s "superzow" #
+  gain (range 0.44 0.66 $ slow 6.66 sine) #
+  octave "<2 3>"
+, rarely (slow 2 . chunk 3 (palindrome)) $
+  slow 3 $
+  stripe 2 $
+  note "[bf3 fs4] <[b*4 f3*3] [df*2 b*3]>" #
+  s "[superchip|supersquare]" #
+  octave "4 5 3 4 3 5 6" #
+  gain 0.77
+, someCyclesBy 0.44 (rev . slow 2 . stutWith 12 (1/72)(|* gain 0.92)) $
+  someCyclesBy 0.33 (stutWith 2 (2/3) id) $
+  struct "~ t" $ s "[cp|gretsch]"
+, sometimes (slow 2) $ s "bd(15,16)?" # gain 1.25
+, someCyclesBy 0.55 (stripe 2) $
+  struct "<t t*8>" $
+  s "linnhats" #
+  gain 0.77 #
+  coarse "<3 4 5 6>"
+] # cps (160/60/4)
+
+hush
+
+
+d1 $ whenmod 11 5 (slow 2 . iter 2) $ stack [
+  sometimesBy 0.22 (mute) $
+    someCyclesBy 0.55 (slow 2) $
+    repeatCycles 4 $
+    degradeBy 0.11 $
+    struct (binaryN 16 "<794613 461379>") $
+    note "<[bf3'min7 b2'6by9'iii] [b4'maj7 fs3'maj7 df3'maj'ii]>" #
+    s "[supertron]" #
+    legato 1 #
+    gain 0.66
+, rarely (mute) $
+    someCyclesBy 0.33 (stutWith "<4 6 8>" (1/24)(|* legato 0.88).(|* gain 0.92)) $
+    degradeBy (range 0.11 0.33 $ slow 5.55 sine) $
+    struct ("<t(<3 5 7 5 3>,<8 4 12>,<0 3 2 1>) t*8 t*16 t*12>") $
+    note (arp "<pinkyup pinkydown>" "<[bf'min7'5 b'6by9'5] [b'maj7'5 fs'maj7'5 df'maj'5]>") #
+    s "[supertron]" #
+    gain 0.66 #
+    octave "5 4 3 2 4 3 4 2 5" #
+    legato 1.5 #
+    detune (range 0.22 0.55 $ slow 6.66 perlin)
+, someCyclesBy 0.22 (stutWith 2 (2/3) id) $
+    struct "~ t" $
+    s "[cp|gretsch]"
+, someCycles (rip 0.125 0.92) $
+    s "bd(5,8)" #
+    gain 1.25
+, slow 2 $ foldEvery [4,5,6] (stripe 2) $
+    struct ("t*8") $
+    s "linnhats" #
+    gain (range 0.66 0.99 $ slow 8.88 sine) #
+    coarse "0 1 2 5 4 3 6"
+ ] # cps (90/60/4)
+
+ hush
+
+
+oh_hai "OH HAI  "
+
+do
+  let pat1 = (binaryN 16 "<456123 321321 753951>")
+      pat2 = (binaryN 16 "<789654 654654 753159>")
+      pat3 = struct (inv pat1)
+  d1 $ slow 2 $ stack [
+      someCyclesBy 0.22 (slow 3 . (# accelerate 0.01625)) $
+      whenmod 11 5 (jux rev . (slow 2 . chop 3)) $
+      iter 2 $
+      mask (pat2) $
+      slow 2 $
+      stripe 2 $
+      struct (pat1) $
+      someCyclesBy 0.33 (slow 2 . plyWith 1 (|* legato 0.9)) $
+      note "<bf'min7'ii fs'maj7>" #
+      s "[supertron|superzow]" #
+      legato 1.5 #
+      octave "<4 3 3 4 2>" #
+      gain 0.66
+    , pat3 $ s "[bd|cp|gretsch]" #
+      room (range 0.11 0.44 $ slow 4.44 sine) # orbit 3
+    , slow "<2 4>" $ trunc (range 0.33 0.99 $ slow 8.88 sine) $ pat3 $
+      note (arp "up" "<bf'min7'ii fs'maj7>") #
+      s "supersquare" #
+      gain 1 #
+      legato 1.77 #
+      octave 2
+    , foldEvery [3,4,5] (slow 2 . stripe 2) $ s "linnhats*8" # gain (range 0.77 0.99 $ slow 3.33 sine) # coarse "0 1 3 2 5 3 1 0"
+    ] # cps (160/240)
+
+hush
+
+
+do
+    let pat1 = (binaryN 16 45621)
+    d1 $ repeatCycles 8 $ slow 2 $ stack [
+        sometimes (mute) $
+        struct (inv pat1) $
+        note "<bf'min7 b'6by9'ii ef'min7>" #
+        s "superpwm" #
+        legato 1.5 #
+        octave "<3 2>"
+      , stutWith 6 (0.125) (|* gain 0.9) $ someCyclesBy 0.22 (stripe 2) $
+        slow "3 6 3" $
+        degradeBy 0.22 $
+        iter 2 $
+        note (arp "converge" "<df'maj'17 b'6by9'18>") #
+        s "superzow" #
+        octave "3 2" #
+        gain 0.77
+      , degradeBy 0.55 $ struct (pat1) $ note "<bf b ef>" # s "supersquare" # legato 1.5 # octave "<2 3>"
+      , struct (pat1) $ s "bd" # gain 1.25
+      , fast 2 $ struct ("t(5,8)") $ s "808cy" # n 1 # coarse "<0 2 4 3 1 5>" # gain 0.91
+      , s "cp"
+      ] # cps (150/240)
+
+hush
+
+
+d1 $ stack [someCyclesBy 0.33 (chop 3) $
+  off 0.125 (# (nudge saw * 0.1 + 0.44)) $
+  note "<bf'min7 ef'min7>" #
+  s "[superhoover]" #
+  octave 3 #
+  gain 0.77
+, slow 2 $
+  someCyclesBy 0.11 (slow 1.11 . plyWith 6 (|* legato 0.97)) $
+  iter 2 $
+  rarely ((# octave 6).(# accelerate "{1 -1}%15").(# room 0.125).(# detune 0.66).(# leslie 0.5)) $
+  note "<[df*3 ef*6] [~ ~ ~ [bf*8|bf]] [fs*4 af*3]>" #
+  s "superzow" #
+  gain 0.77
+, slow 2 $
+  repeatCycles 3 $
+  struct ("t*11") $
+  note "<bf fs ef df ef b>" #
+  s "superchip" #
+  octave "<2 2 3 2 3>" #
+  gain 0.99
+, slow 2 $
+  degradeBy 0.33 $
+  struct ("t(11,16)") $
+  s "bd" # gain 1.11
+, degradeBy 0.66 $ trunc 0.33 $ struct (inv "t(11,16)") $ s "[cp|gretsch]"
+, foldEvery [6,7,8] (slow 2 . stripe 2) $
+  struct ("t*16?") $
+  s "linnhats" #
+  coarse "<0 3 1 4>" #
+  gain 0.91
+] # cps (150/240)
+
+
+
+oh_hai "keep  your     d i s t a n c e   from one an othe r    . get away from me   ..  thank y o u for your cooperation . . .     "
+
+d1 $ whenmod 1 8 (iter 3) $ stack [
+  someCycles (jux rev) $
+  someCyclesBy 0.33 ((stripe 2).(# legato 0.66)) $
+  slow 2 $
+  bite 8 "{0@2 4*4 3*3@3 1 5*5@5 2*2}%<6 3 8 4>" $
+  note (arp "up converge down" "<bf'min7'8 [ef'min7'12|b'6by9'9]>") #
+  s "superhoover" #
+  gain 0.88 #
+  octave "3 2 3 4 2 3 3 5" #
+  legato 1.66
+, note "<bf [fs ef] df [~ ef ~ b]>" #
+  s "superchip" #
+  octave "<3 2 2 3 2>"
+, rarely (struct "t*8") $ s "clubkick"
+, someCyclesBy 0.55 (linger 0.25) $ slow 2 $ struct (binaryN 16 8675309) $ s "808cy" # speed 0.75 # coarse "2 3 3 4" # orbit 3
+] # cps (150/240)
+
+hush
+
+
+d1 $ someCyclesBy 0.55 (slow 1.11 . palindrome) $ stack [
+  repeatCycles 2 $
+  foldEvery [4,5,6] (jux rev . iter 3 . off 0.0625 (# accelerate (-0.0125))) $
+  someCyclesBy 0.33 (slow "<2.22 3.33>" . plyWith 1 (|* gain 0.92) . struct (cat ["t*16", "t*8"])) $
+  struct ("t(<7 9 11 13>,8)") $
+  note "<[ef'min7'5|bf'min7'5|[ef'm11'5 bf'm9'5]] [fs'maj9'5|df'maj9'5|df'sus2'5]>" #
+  s "[supersquare]" #
+  octave "[3 4] [5 4] [4 3]" #
+  legato "0.55 1 1.55" #
+  gain 0.77
+, slow 2 $ struct (binaryN 16 10111) $ s "~ gretsch" # gain 1.22 # room 0.22 # size 0.55 # orbit 3
+, struct ((inv)(binaryN 16 10111)) $ s "[bd]" # gain 1.25
+] # cps (90/240)
+
+
+hush
+
+d1 $ stack [
+  slow 2 $ stutWith "<8 6>" (1/24)(|* legato 0.88).(|* gain 0.97) $
+  struct (binaryN 16 "<46064 52528>") $
+  note "<bf4'min7 f3'min7'iii [e4'maj9 ~] df'sus2>" #
+  s "superzow" #
+  legato 1 #
+  gain 0.55
+, slow "<2 3 2>" $ layer [rev, chop "<6 3>"] $
+  struct ("t(<11 13>,16)") $
+  note (arp "<up>" "<df'sus2'12 f'min7'12>") #
+  s "supertron" #
+  octave "4 3" #
+  legato 0.55 #
+  gain 0.66
+, someCyclesBy 0.11 (stutWith 12 (1/36)(|* gain 0.95)) $
+  s "~ cp" #
+  gain 1.11
+, struct ("t*16") $
+  s "808cy" #
+  n "0 1 3" #
+  room 0.22 #
+  size 0.55 #
+  coarse 2 #
+  gain 0.77 #
+  orbit 3
+, someCyclesBy 0.33 (within (0.66, 0.99)(ply 3)) $
+  s "clubkick(3,8)" #
+  gain 1
+] # cps (90/240)
+
+hush
+
+d1 $ whenmod 1 8 (iter 4) $ stack [
+  someCyclesBy 0.11 (slow "<2 4>" . chop 3 . (# accelerate "{-1 1}%3")) $
+  someCyclesBy 0.22 (0.0125 ~>).(layer [rev, iter 2]) $
+  someCyclesBy 0.44 (mask (binaryN 16 "<19519 45454 12321>")) $
+  someCyclesBy 0.44 (fast 2) $
+  struct ("t(<5 7>,8,<0 3 2 1>)") $
+  cat [note (arp "down" "<af3'maj9'8 [f4'min7'8 df4'sus2]>"), note "bf5*16 f5*12"] #
+  s "<supertron [supernoise|supersquare]>" #
+  gain 0.66
+, struct ("t(<5 7>,8,<0 3 2 1>)") $
+  s "bd" #
+  gain 1.22
+, someCyclesBy 0.22 (slow 2) $
+  struct ((inv)("t(<5 7>,8,<0 3 2 1>)")) $
+  s "cp"
+, note "[<bf f af [df|c]>|<~ f*2 af df*3>]" #
+  s "superchip" #
+  octave "2 3 3" #
+  legato 1
+, someCyclesBy 0.22 (stutWith 4 (1/24)(|* gain 0.94).(|* legato 0.92)) $
+  struct (cat ["t*12", "t(7,8)", "t*16"]) $
+  s "808cy" #
+  n (irand 22) #
+  coarse "4 [3 2] 1" #
+  gain 0.77
+] # cps (130/240)
+
+hush
+
+
+d1 $ whenmod 11 5 (iter 2) $ stack [
+  someCyclesBy 0.33 (layer [((0.125 <~) . slow 2 . (rev . ply 1)), id]) $
+  struct "<t(5,8,<0 3 1 2 4>)>" $
+  note "<bf4'min7'5 [f3'min7'5 gf3'6by9'5] [~ f4'min7'5] [df4'maj9'5|[~ b3'sus2'5]]>" #
+  s "supertron" #
+  gain 0.66 #
+  legato 0.77
+, struct ("t(3,4)") $
+  note "<bf df df gf>" #
+  s "superchip" #
+  octave 2 #
+  gain 1 #
+  legato 1
+, struct (binaryN 16 76767) $ s "linnhats" # gain 1
+, struct ((inv)(binaryN 16 76767)) $ s "clubkick" # gain 1
+] # cps (130/240)
+
+hush
+
+
+d1 $ stack [
+  slow 3 $
+  repeatCycles 3 $
+  whenmod 11 5 (iter 2 . rev) $
+  someCyclesBy 0.22 (off 0.125 ((struct "t*3").(# legato 0.55))) $
+  someCyclesBy 0.44 (slow 2 . chop 2) $
+  struct ("t(12,8)") $
+  note (arp "converge" "<ef'six'7 ef'maj7'7>") #
+  s "superhoover" #
+  octave "2 3 4 5 2 3 3 4 2 2" #
+  legato (range 1 6 $ slow 8.88 sine) #
+  gain 0.77
+, struct "<t(<3 5>,4)>" $ note "<c f g af bf>" #
+  s "superchip" #
+  legato 1 #
+  gain 0.88 #
+  octave "<2 3 2 3>"
+, someCyclesBy 0.77 (trunc 0.22) $
+  struct "t(<3 5>,4)" $
+  s "clubkick"
+] # cps (140/240)
+
+
+d1 $ stack [
+  cat [
+    chop "4 <6 8> 10 12" $
+    slow 4 $ struct ("t(<5 6>,8)") $
+    note "<df4'maj9 [<bf4'min7 af3'6by9>]>" #
+    s "supertron" #
+    legato (range 0.77 2.22 $ slow 11.11 sine) #
+    gain 0.55
+  , someCyclesBy 0.55 (mask (binaryN 16 5150)) $
+    someCyclesBy 0.33 (off 0.125 (# accelerate (-0.33))) $
+    someCyclesBy 0.22 (fast 2 . rev) $
+    struct (cat ["t*12", "t*8", "t*6", "t*4"]) $
+    note (arp "diverge converge" "<af'6by9'16 df4'maj9'16>") #
+    s "superzow" #
+    octave "3 2 4 4 2 3" #
+    legato (range 1.11 2.22 $ slow 6.66 sine) #
+    gain 0.66]
+, chop "4 <6 8> 10 12" $
+  slow 4 $ struct ("t(<5 6>,8)") $
+  note "<df [<bf af>]>" #
+  s "superchip" #
+  legato 0.66 #
+  octave "3 2 3 3 2" #
+  gain 0.99
+, density (choose [0.5,1,2.5,0.75]) $
+  s (randcat ((replicate 1 "gretsch*4") ++ (replicate 2 "gretsch*8"))) #
+  n (irand 30)
+] # cps (100/240)
+
+hush
+
+do
+    let pat = (binaryN 16 515014)
+    d1 $ stack [
+        struct (pat) $
+        note "<df [g fs]>" #
+        s "superchip" #
+        octave "<3 2>" #
+        gain 0.99
+      , struct (cat [pat, (inv)(pat)]) $
+        note "<df4'min7'4 [d4'maj7'4 e4'maj'4]>" #
+        s "supertron" #
+        gain 0.55
+      , struct (pat) $ s "bd"
+      , someCyclesBy 0.44 (slow 2 . ply 2 . jux rev) $
+        slow 2 $
+        trunc (0.33) $
+        struct ((inv)(pat)) $
+        s "cp"
+      , struct (randcat ["t*8", "t*12", "t*16"]) $
+        s "[linnhats|808cy]" #
+        n (irand 30) #
+        gain 0.88
+      ] # cps (100/240)
+
+hush
+
+
+d1 $ stack [
+  compress 2 $
+  struct "<t*48 f>" $
+  s "bd"
+, compress 2 $
+  struct "<t*48 f t*48 f>" $
+  note "<bf'min7 ~ f'min7 ~ fs'6by9'ii ~ f'min7 ~>" #
+  s "superhoover" #
+  legato (range 0.66 1.5 $ slow 2 sine) #
+  octave 4 #
+  gain 0.66 #
+  orbit 3
+, someCyclesBy 0.22 (mask ("t(12,8)")) $
+  someCyclesBy 0.55 (slow 2 . rev . ply 2 . iter 2) $
+  someCyclesBy 0.33 (slow "<1 2>" . (slow 2 . plyWith 4 (|* gain 0.95)) . bite 8 "{7*6 6*5 0*2}%2") $
+  note (arp "<[converge up] [diverge down] [down up]>" "<bf'9sus4'16 df'sus2'16 af'maj7'16>") #
+  s "supercomparator" #
+  octave "[2 3] [<3 2> 2] [<3 4> 2]" #
+  legato (range 0.77 2.22 $ slow 7.77 sine) #
+  detune 0.77 #
+  gain 0.77
+, slow 2 $ struct ("t*16") $
+  note "{bf@2 f@2 fs@2 f@2}%1" #
+  s "superchip" #
+  octave 2 #
+  legato 1 #
+  gain 0.88
+, (0.25 ~>) $ slow 2 $ struct "<f t>" $ s "cp" # speed "[0.77|0.99]" # room 0.44 # size 0.77 # orbit 3
+] # cps (140/240)
+
+hush

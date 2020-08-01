@@ -1,0 +1,181 @@
+d1
+  $ often (stut 8 0.5 (-0.1) ) . (stut 4 0.25 0.9)
+  $ every 4 (degradeBy (choose [0.25,0.5,0.9]))
+  $ every 3 (slow (choose [3,2,1,5]))
+  $ slow 3
+  $ s $ samples "newnotes*219" "0 0 3 3 -5 3 4 8 2 2 1 1 9"
+
+
+d1 $ s $ samples "arpy*219" "0 0 3 3 -5 3 4 8 2 2 1 1 9"
+
+d1 $ s "newnotes:01 newnotes:04"
+
+d1 $ stack [
+  every 3 (# speed 2) $ s "jazz:05(<5 7>,9)" # speed 0.5 # crush 7
+, s "{odx*2@1 cp@7}%9" # gain 0.94
+, stut 5 (1/3)(0.75) $ s "<ul:01(5,9,2)>"
+]
+
+hush
+
+d1 $
+  every 4 (# speed 0.6) $
+  slow 3 $
+  stutWith 4 (2/3)(# lpf "<500 5000>") $
+  cat [s "mtn(2,7)", s "mtn:1"] #
+  cut 1
+
+
+hush
+
+d1 $ stutWith 8 (1/8)(# lpf (slow 6 (range 500 5000 sine))) $
+  slow 2 $
+  cat [s "[imp(7,8)]", s "trl(2,8)"] #
+  cut 1 #
+  speed "1 0.5 2 0.4 1 1 0.5 0.77" #
+  crush (slow 6 (range 10 4 sine)) #
+  delay 0.7 #
+  delaytime 0.25 #
+  delayfeedback 0.6
+
+
+hush
+
+d1 $ (# cps ("0.5 0.75" * (range 0.5 1.5 $ slow 6 perlin))) $
+stack [
+  struct (cat ["<t(3,8) t(4,4)>", "<t(<3 5>,8,<0 1>) t*4>"]) $
+  s "<bd clubkick>"
+, note (cat ["<af4'sus2(<3 7>,8) ef4'sus2(5,8,<2 1>)>", "{0 ~ 3 7 -2 0 10 ~}%12"]) #
+  s "808" #
+  speed 0.484 #
+  waveloss "<22 11 33>" #
+  lpf (range 1000 17500 $ slow 6 sine) #
+  crush (range 4 10 $ slow 12 sine)
+, s "cp(<0 1 2>,<2 4>,2)"
+]
+
+
+hush
+
+d1 $ stack [
+  every 6 (stut 4 (2/3)(0.5)) $ fast 2 $ s "alpha1(<4 5 3 1>,<7 8>,<0 2 1 0>)" # n "<1 2 3 4 5>" # speed "<0.5 0.75 1 1.25>" # gain 1
+, striateBy 8 (1/16) $ s "alpha3*12" # n "<1 2>" # speed (range 0.9 1 $ slow 6 sine)
+]
+
+
+hush
+
+d1 $ stack [
+  s "[bd*4 ~, cp/3]" #
+  orbit 1
+, every 3 ((striate 2) . (jux rev) . (slow 3) . (stutWith 6 (3/6)(# lpf "1000"))) $
+  s "~ arpy(9,12)?" #
+  n (scale "minPent" "0..7") #
+  speed 0.33 #
+  cut "[1 -1]*3" #
+  room 0.6 #
+  size 0.9
+, slow (choose [4,6,8]) $
+  s "~ arpy*16" #
+  orbit 1 #
+  n (scale "melodicMinor" "0..7") #
+  speed 0.66 #
+  legato 2 #
+  phasr "1.5" #
+  phasdp (range 0.5 0.9 sine) #
+  delay "0.8" #
+  delaytime "0.5" #
+  delayfeedback "0.66"
+]
+
+
+hush
+
+d1 $
+  every 3 (slow 6 . jux (rev)) $
+  every 2 (# n (scale "melodicMinor" "0..7")) $
+  stutWith 5 (1/6) id $
+  degradeBy 0.2 $
+  s "moog(5,7)" #
+  lpf (slow 5 $ range 500 8000 saw) #
+  speed "1 2 6 9" #
+  cut 1 #
+  room 0.2 #
+  size 0.4 #
+  delay 0.5 #
+  delaytime 0.5 #
+  delayfeedback 0.333
+
+
+d1 $ stack [
+  stutWith (choose [5,10,15]) (choose [1/16,1/4]) (# lpf (slow 6 (range 250 4000 tri))) $
+  s "~ cp" #
+  orbit 1 #
+  room 0.5
+, stutWith (choose [5,10,15]) (choose [1/4,1/8]) (# lpf (slow 2 (range 500 5000 saw))) $
+  s "bd" #
+  orbit 1 #
+  gain 0.9
+, sometimes (rev) $
+  every 3 (# speed 0.66) . slow 4 $
+  s "arpy*32" #
+  n (scale "bartok" "0..7") #
+  orbit 2 #
+  speed 0.33 #
+  delay 0.25 #
+  delaytime 0.33 #
+  delayfeedback 0.1
+]
+
+
+d1 $ every 6 ((striate 3).(# speed 0.5)) $
+  s "ppad*5?" #
+  cut 1
+
+d1 $ s "~ ~ ~ ppad:1"
+
+
+
+hush
+
+d1 $ stack [
+  slow "<16 8>" $
+  jux (# speed (range 1.11 2.22 $ slow 3 sine)) (striateBy 1000 (1/25) $ note "0 1 2" # s "juno") # gain (range 0.55 0.99 $ slow 6.66 perlin)
+, s "bd*8?"
+, s "linnhats*16" #
+  speed 0.88 #
+  gain 0.81
+, degradeBy 0.44 $
+  sometimes (destabilizeBy 0.25) $
+  slow 4 $
+  struct (ascii "[b i] [[n a] [r y]]") $
+  s "cp"
+, degradeBy 0.33 $
+  note "{7*4@4 4 -7 0 0 4 -7 2 12 4 -7 0 0 4 -7 0 0 4 -10 0}%16" #
+  s "arpy"
+]
+
+
+d1 $
+  slow 2 $
+  rev $
+  s "moog:5*16" #
+  up "7 4 -7 0 0 4 -7 2 12 4 -7 0 0 4 -7 0 0 4 -10 0" #
+  delay "0.33" #
+  delayfeedback "0.7" #
+  delaytime "0.7" #
+  legato 0.5 #
+  room 0.5 #
+  gain "< 0.8 0.7 0.6 0.5 0.6 0.7 0.8 >"
+
+d1 $
+  slow 4 $
+  rev $
+  s "[moog:5 arpy:3]*16" #
+  up "7 4 -7 0 0 4 -7 2 12 4 -7 0 0 4 -7 0 0 4 -10 0" #
+  delay 0.33 #
+  delayfeedback 0.5 #
+  delaytime 0.7 #
+  legato "<0.5 0.4 0.3>" #
+  room 0.33 #
+  gain "<0.9 0.7 0.5 0.7 0.9>"
