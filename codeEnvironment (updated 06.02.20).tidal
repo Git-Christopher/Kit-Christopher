@@ -2832,5 +2832,3 @@ d1 $ whenmod 11 4 (iter 3) $ stack [
   dek 3 1 #
   octave 3
 ] # cps (160/240)
-
---this is a comment
