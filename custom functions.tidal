@@ -34,6 +34,16 @@ let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
 spill "check 1 2 "
 
 
+import Sound.Tidal.Chords
+
+mu :: Num a => [a]
+mu = [0,2,4,7]
+
+let chord = getChord chordTable ++ [("mu",mu)]
+
+let chord = getChord (chordTable ++ [("mu",mu), [0,2,4,7])
+
+
 --link protocol
 sock <- carabiner tidal 4 (-0.14)
 
