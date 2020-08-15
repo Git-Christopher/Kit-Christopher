@@ -1,14 +1,16 @@
 let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
-    oh_hai text2 = sequence_(replicator text2)
+    spill text2 = sequence_(replicator text2)
     replicator' n text1 = [putStr (text1) | x <- replicate n text1]
-    oh_hai' n text2 = sequence_(replicator' n text2)
+    spill' n text2 = sequence_(replicator' n text2)
     destabilizeBy a p = (a <~) p
     mute p = degradeBy 1 $ p
     rip a b p = within (0.25, 0.75) (slow 2 . stutWith 8 (a/(-8))(|* gain b)) p
     devolve p = (# pan (range 0 1 $ slow 8.88 perlin)).(# cps ("<0.65 0.75 0.85 0.95 1.05 1.15>" * (range 0.55 1.11 $ slow 22.22 perlin))) $ p
     compress x p = slow x $ (# (nudge (range 0 1 $ slow 2 sine))) $ p
     rinse a b p = ((1/a) <~) $ struct (slow b "t") $ loopAt (-1/a) $ p
-    pry p = slow 2 $ foldEvery [4,5,6] (stripe 2) $ p
+    trap p = slow 2 $ foldEvery [4,5,6] (stripe 2) $ p
+    screw p = someCyclesBy 0.66 (plyWith 2 ((0.25 <~).(# legato 0.5))) $ p
+    tilt p = whenmod 11 5 ((spaceOut [2,1.95..0.75]).(iter 2)) $ p
     shrand x = (x ~>) $ rand
     dRack :: Pattern String -> ControlPattern
     dRack = n . (subtract 48 . drumN <$>)
@@ -29,7 +31,13 @@ let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
     ccdown n = ccv (range 127 0 $ saw) # ccn n
     randcc n = ccv (range 0 127 $ rand) # ccn n
 
-oh_hai "check 1 2 "
+spill "check 1 2 "
+
+
+--link protocol
+sock <- carabiner tidal 4 (-0.14)
+
+sendMsg sock "bpm 138"
 
 --midimap
 

@@ -53,9 +53,24 @@ s.latency = 0.3;
 
 MIDIClient.init;
 
-~midiOut = MIDIOut.newByName("IAC Driver", "Tidal");
+~midiOut = MIDIOut.newByName("IAC Driver", "Bus 1");
 
 ~dirt.soundLibrary.addMIDI(\funcrush, ~midiOut);
+
+--first
+p "midiclock" $ midicmd "midiClock*48" # s "funcrush"
+
+--second
+once $ midicmd "stop" # s "funcrush"
+
+--third
+p "midictl" $ midicmd "start/4" # s "funcrush"
+
+--fourth
+p "midictl" $ silence
+
+--fifth
+let hush = mapM_ ($ silence) [d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15,d16]
 
 
 
