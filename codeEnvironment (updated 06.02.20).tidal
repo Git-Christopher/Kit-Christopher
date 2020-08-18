@@ -2827,3 +2827,21 @@ d2 $ whenmod 11 4 (iter 3) $ stack [
   dek 3 1 #
   octave 3
 ] # cps (160/240)
+
+
+
+
+
+do
+    let (rPat) = (binaryN 16 "<101110 466622 711117>")
+    d2 $ sometimes (slow 2) $ rarely ((slow 2 . tilt . rev)) $ stack [
+        degradeBy (range 0.22 0.66 $ slow 11.11 sine) $ struct (rPat) $ note "<[df'sus2|df'nineSus4|~ af] [b'maj9 ~ ef'm11]>" # dek "8 2 2 8" (range 0.5 2 $ slow 4 sine) # octave "3 4 3 3 4"
+      , mute $ someCyclesBy 0.77 (off 0.125 (slow 2 . ply 4)) $ note (arp "<[converge [down up]] [diverge]>" "<af'7sus2'12 [fs'6by9'12 ~ ]>") # dek "8 3" (range 0.5 3 $ slow 4.44 sine) # octave 3
+      , mute $ someCyclesBy 0.44 (degradeBy 0.66) $ struct (rPat) $ note "<df [b ~ ef]>" # dek 5 0.33 # octave "2 3 2 3"
+      , someCyclesBy 0.33 (trunc 0.25 . (off 0.125 (rev))) $ struct (rPat) $ rakk "{1,{2 ~ 4}%<1 4>}"
+      , mute $ someCyclesBy 0.55 (degradeBy 0.22 . (slow 2 . ply 4)) $ struct ((inv)(rPat)) $ rakk "<3 [5*3|~ 6]>"
+        ] # cps (140/240)
+
+
+
+x

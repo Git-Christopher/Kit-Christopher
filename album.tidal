@@ -71,7 +71,60 @@ let ryk = (binaryN 16 "<45476 100088 9000075 122231 89621>")
         )
       ]
 in
-d1 $ ur 256 "a b c" pats []
+d2 $ ur 256 "a b c" pats []
+
+
+
+let (rPat) = (binaryN 16 "<101110 466622 711117>")
+    pats =
+      [
+        ("a", sometimes (slow 2) $ rarely ((slow 2 . tilt . rev)) $ stack [
+            degradeBy (range 0.22 0.66 $ slow 11.11 sine) $
+            struct (rPat) $
+            note "<[df'sus2|df'nineSus4|~ af*8] [b'maj9 ~ ef'm11]>" #
+            dek "8 2 2 8" (range 0.5 2 $ slow 4 sine) #
+            octave "3 4 3 3 4"
+          , mute $ someCyclesBy 0.77 (off 0.125 (slow 2 . ply 4)) $
+            note (arp "<[converge [down up]] [diverge]>" "<af'7sus2'12 [fs'6by9'12 ~ ]>") #
+            dek "8 3" (range 0.5 3 $ slow 4.44 sine) #
+            octave 3
+          , mute $ someCyclesBy 0.44 (degradeBy 0.66) $
+            struct (rPat) $
+            note "<df [b ~ ef]>" #
+            dek 5 0.33 #
+            octave "2 3 2 3"
+          , someCyclesBy 0.33 (trunc 0.25 . (off 0.125 (rev))) $ struct (rPat) $ rakk "{1,{2 ~ 4}%<1 4>}"
+          , mute $ someCyclesBy 0.55 (degradeBy 0.22 . (slow 2 . ply 4)) $ struct ((inv)(rPat)) $ rakk "<3 [5*3|~ 6]>"
+            ]
+        ),
+        ("b", sometimes (slow 2) $ (slow 2 . tilt . rev) $ stack [
+            mute $ degradeBy (range 0.22 0.66 $ slow 11.11 sine) $ struct (rPat) $ note "<[df'sus2|df'5|~ af'5] [b'maj9 ~ ef'm11]>" # dek "8 2 2 8" (range 0.5 2 $ slow 4 sine) # octave "3 4 3 3 4"
+          , someCyclesBy 0.55 (off 0.125 (slow 2 . chop 2)) $ note (arp "<[converge [up]] [diverge]>" "<af'7sus2'10 [fs'6by9'8 ~ ]>") # dek "8 3" (range 0.5 3 $ slow 4.44 sine) # octave 3
+          , someCyclesBy 0.44 (degradeBy 0.66) $ struct (rPat) $ note "<df [b ~ ef]>" # dek 5 0.33 # octave "2 3 2 3"
+          , someCyclesBy 0.33 (trunc 0.25 . (off 0.125 (rev))) $ struct (rPat) $ rakk "{1,{2 ~ 4}%<1 4>}"
+          , mute $ someCyclesBy 0.55 (degradeBy 0.22 . (slow 2 . ply 4)) $ struct ((inv)(rPat)) $ rakk "<3 [5*3|~ 6]>"
+            ]
+        ),
+        ("c", sometimes (slow 4) $ sometimesBy 0.55 ((slow 2 . tilt . rev)) $ stack [
+            degradeBy (range 0.22 0.66 $ slow 11.11 sine) $ struct (rPat) $ note "<[df'sus2|df'nineSus4|~ af] [b'maj9 ~ ef'm11]>" # dek "8 2 2 8" (range 0.5 2 $ slow 5.55 sine) # octave "5 [3 4] 3 3 4"
+          , mute $ someCyclesBy 0.77 (off 0.125 (slow 2 . ply 4)) $ note (arp "<[converge [down up]] [diverge down]>" "<af'7sus2'24 [fs'6by9'8 ~ ]>") # dek "8 3" (range 0.5 3 $ slow 4.44 sine) # octave 3
+          , someCyclesBy 0.77 (degradeBy 0.66) $ struct (rPat) $ note "<df [b ~ ef]>" # dek 5 0.33 # octave "2 3 2 3"
+          , someCyclesBy 0.33 (trunc 0.25 . (off 0.125 (rev))) $ struct (rPat) $ rakk "{1,{2 ~ 4}%<4 1 2>}"
+          , someCyclesBy 0.33 (degradeBy 0.44 . (slow 2 . ply 2)) $ struct ((inv)(rPat)) $ rakk "<3 [~|~ 5*2]>"
+            ]
+        ),
+        ("d", sometimes (slow 2) $ sometimesBy 0.55 ((slow 2 . tilt . rev)) $ stack [
+            mute $ degradeBy (range 0.22 0.66 $ slow 11.11 sine) $ struct (rPat) $ note "<[df'sus2|df'nineSus4|~ af] [b'maj9 ~ ef'm11]>" # dek "8 2 2 8" (range 0.5 2 $ slow 5.55 sine) # octave "5 [3 4] 3 3 4"
+          , mute $ someCyclesBy 0.77 (off 0.25 (slow 2 . ply 2)) $ note (arp "<[converge [down up]] [diverge down]>" "<af'7sus2'24 [fs'6by9'8 ~ ]>") # dek "8 3" (range 0.5 3 $ slow 4.44 sine) # octave 3
+          , mute $ someCyclesBy 0.44 (degradeBy 0.66) $ struct (rPat) $ note "<df [b ~ ef]>" # dek 5 0.33 # octave "2 3 2 3"
+          , someCyclesBy 0.33 (trunc 0.5 . (off 0.25 (slow 2))) $ struct (rPat) $ rakk "{1,{4 ~ 2}}"
+          , mute $ someCyclesBy 0.33 (degradeBy 0.22 . (slow 2 . ply 2)) $ struct ((inv)(rPat)) $ rakk "<3 [~|~ 6*4]>"
+            ]
+        )
+      ]
+in
+d2 $ ur 256 "a b c d" pats [] # cps (135/240)
+
 
 
 hush

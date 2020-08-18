@@ -1,12 +1,12 @@
 
 
- n 1, n 2, n 3, n 4, n 5, n 6, n 7
 
+ n 1, n 2, n 3, n 4, n 5, n 6
 
 x
 
 
-
+spill "slow & fast, live & improvised, funky & fresh straight from dallas tx  "
 
 
 hush
@@ -14,30 +14,123 @@ hush
 
 do
     let rPat = (binaryN 16 "<81100 53355 10001>")
-    d2 $ tilt $ stack [
-        mute $ screw $ slow 8 $ slice 16 "[0 .. 15]" $ s "geto" # cat [n 7] # legato 1 # speed 0.75
-      , someCyclesBy 0.22 (# octave 3) $ note "<e f e [b|c]>" # dek 5 1 # octave 2
-      , someCycles (mask "t*8?") $ struct (rPat) $ note "<e'm9 [f'6by9|f'maj7] e'min7 b'min7>" # dek 2 1 # octave "4 3 5 4 3"
-      , foldEvery [7,8] (rev . iter 4) $ someCyclesBy 0.55 (slow 2 . bite 4 "{~ <0*2 [1 3@3]> [~ 2@2, 1*2 ~]}%<2 1>") $ someCyclesBy 0.44 (fast "<1 2>" . linger (choose [0.25,0.5])) $ note (arp "<[converge down] [up updown]>" "<a'nineSus4'16 d'sus2'16>") # dek 3 1 # octave 2
-      , slow 2 $ trap $ struct "t*16" $ s "linnhats" # gain 0.77
-      , someCyclesBy 0.33 (slow "<1 2 3>" . stutWith 16 (1/24)(|* gain 0.92)) $ s "~ cp"
+    d2 $ tilt $
+        stack [
+        mute $ screw $
+        slow 8 $
+        slice 16 "[0..15]" $
+        s "geto" # cat [n 7] #
+        legato 1 #
+        hpf 250 #
+        speed 0.75
+      , someCyclesBy 0.22 (# octave 3) $
+        note "<e f e [b|c]>" #
+        dek 5 1 #
+        octave 2
+      , mute $ someCycles (mask "t*8?") $
+        struct (rPat) $
+        note "<e'm9 [f'6by9|f'maj7] e'min7 b'min7>" #
+        dek 2 1 #
+        octave "4 4 5 4 6 4 5"
+      , foldEvery [7,8] (rev . iter 2) $
+        someCyclesBy 0.55 (slow 2 . bite 4 "{~ <[0*2|2@2] [1*2 3@3 ~]> [~ 2@2, 1*2 ~]}%<2 1 3>") $
+        someCyclesBy 0.44 (fast "<1 2>" . linger (choose [0.5])) $
+        note (arp "<[converge down] [up updown]>" "<a'nineSus4'16 d'sus2'16>") #
+        dek 3 1 #
+        octave 2
+      , mute $ slow 2 $
+        trap $
+        struct "t*16" $
+        s "linnhats" #
+        gain 0.74
+      , mute $ someCyclesBy 0.33 (slow "<1 2 3>" . stutWith 16 (1/24)(|* gain 0.92)) $
+        s "~ cp"
       , rakk "{1(<3 5>,8)?,2/2}"
-      , mute $ someCyclesBy 0.22 (stutWith 2 (1/3)(id)) $ rakk "~ 3"
-      , slow 3 $ note "{[~ c3*2] ~ cs3 ~ d3}%2" # dek 7 1
-        ]
+      , someCyclesBy 0.22 (stutWith 2 (1/3)(id)) $
+        rakk "~ 3"
+      , slow 3 $
+        note "{[~ c3*2] ~ cs3 ~ d3}%2" #
+        dek 7 1
+        ] # cps (127/240)
+
+
+
+do
+    d2 $ stack [
+        --repeatCycles 4 $
+        someCyclesBy 0.22 (# octave 3) $
+        note "<e@2 f@2 g@2 [b@2|c@2]>" #
+        dek 5 1 #
+        octave 2
+      , note "<[c'maj9'iii|g'6by9'iii]>" #
+        dek 4 1 #
+        octave 3
+      , mute $ slow "<2 4>" $
+        note "{~ ds3*8 ~ ~ c3}%1" #
+        dek 7 1
+        ] # cps (127/240)
+    d3 $ mute $ slow 24 $ s "sagan" # gain 0
+
 
 
 do
     let rPat = ("t(3,8,<0 3>)")
     d2 $ stack [
-        mute $ screw $ slow 8 $ slice 16 "[0 .. 15]" $ s "geto" # cat [n 0, n 7] # legato 1 # speed 0.75
-      , someCyclesBy 0.22 (# octave 3) $ note "<[~ e*4] f g*4 [~ b|c ~]>" # dek 5 1 # octave 2
-      , mute $ someCyclesBy 0.44 (off 0.125 (struct ((inv)(rPat)))) $ struct (rPat) $ note "<[c'maj7'iii|g'6by9'iii]>" # dek 2 1 # octave "4 3 5 4 3 6"
-      , someCyclesBy 0.66 (mask "<t*6? t*4 t@4>") $ whenmod 12 6 (# octave "2 4").(rev).(off 0.25 (slow "<4 2>" . chop 2)) $ note (arp "<[up|down] [up converge]>" "<d'sus2'10 c'sus2'4 g'6by9'12>") # dek 3 1 # octave 3
-      , someCyclesBy 0.33 (0.25 <~) $ fast 1 $ struct (binaryN 16 91223) $ rakk "5 6"
-      , struct (rPat) $ rakk "1"
-      , foldEvery [3,4,5] (slow 2 . rev) $ someCyclesBy 0.33 (plyWith 8 (|* legato 0.5)) $ rakk "{3(1,8,3),~ [2 [~4]]}"
-        ] # cps (138/240)
+        mute $ slow 2 $
+        slice 16 "{3*4 3@2 ~ 1*3 ~ 0 0 1 6*7}%<2 4>" $
+        s "geto" #
+        cat [n 0] #
+        legato 1 #
+        speed 0.75
+      , someCyclesBy 0.22 (# octave 3) $
+        note "<[~ e*4] f g*4 [~ b|c ~]>" #
+        dek 5 1 #
+        octave 2
+      , mute $ someCyclesBy 0.44 (off 0.125 (struct ((inv)(rPat)))) $
+        struct (rPat) $
+        note "<[c'maj9'iii|g'6by9'iii]>" #
+        dek 2 1 #
+        octave "4 3 5 4 3 6"
+      , slow 2 $
+        someCyclesBy 0.66 (mask "<t*6? t*4 t@4>") $
+        whenmod 12 6 (# octave "2 4").(rev).(off 0.25 (slow "<4 2>" . chop 2)) $
+        note (arp "<[up|down] [up converge]>" "<d'sus2'10 c'sus2'4 g'6by9'12>") #
+        dek 3 1 #
+        octave 3
+      , someCyclesBy 0.33 (0.25 <~) $
+        fast 1 $
+        struct (binaryN 16 91223) $
+        rakk "5 6"
+      , struct (rPat) $
+        rakk "1"
+      , foldEvery [3,4,5] (slow 2 . rev) $
+        someCyclesBy 0.33 (plyWith 8 (|* legato 0.5)) $
+        rakk "{3(1,8,3),~ [2 [~4]]}"
+      , whenmod 8 5 (ply 4) $
+        slow "<1 2 4>" $
+        note "{~ ds3*8@2 ~ ~ [cs3|c3@2]}%3" #
+        dek 7 1
+        ] # cps (127/240)
+
+
+
+do
+    d2 $ stack [
+        mute $ slow 2 $
+        someCyclesBy 0.22 (off 0.125 (slow 2 . rev)) $ slice 16 "{[0*3 ~] ~ 1*3, [2*3 0 ~ ] [6*2 ~]}%<2 4>" $
+        s "threeSix" #
+        legato 0.5 #
+        speed 0.86625 #
+        gain 0.88
+      , note "<[~ e ~ b] [e ef] [b ~ df ~] [~ ~ fs df]>" # dek 5 1 # octave "4 3"
+      , mute $ note (arp "[converge down]" "<df'nineSus4'8 e'maj9'12>") # dek 3 1 # octave "2 3"
+      , struct "1(<3 5>,<8 16>,<1 3>)" $ s "clubkick"
+      , sometimes (plyWith 10 (# gain 0.66)) $ s "cp"
+      , mute $ struct "<t*8 t*12 t*16>" $ s "linnhats" # gain 0.75
+        ] # cps (128/240)
+
+hush
+
 
 
 
