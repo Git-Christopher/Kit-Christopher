@@ -1,0 +1,40 @@
+hush
+
+do
+    let space p = whenmod 11 5 (shuffle 2 . bite 2 "{0 1 [~|1*4] 0 [1*2|0*3]}%<1 1.5 0.5>") $ while "<f f t t f>" (rev . iter 2 . (slow 4 . stutWith 2 (0.1625) (trunc 0.125))) $ p
+    d2 $ someCyclesBy 0.11 (space) $ stack [
+        someCyclesBy 0.11 (mask ("t*4?")) $
+        someCyclesBy 0.77 (chunk 2 (slow 2 . rot 2)) $
+        someCyclesBy 0.55 (slow 4 . chop 3 . (# legato 0.5)) $
+        struct "<t*16?>" $
+        n "<fs'6by9'4 af'7sus4'4 bf'min'4 fs'sus2'4>" #
+        dek 3 1 "4 3 5 4 4" |+
+        n "<[<12 0>] [<7 0>] [0 5] [<0 7>]>"
+      , slow "1 2" $ struct "<t*16?>" $
+        n "<fs af bf b>" #
+        dek 5 1 "<3 2 2 2>"
+      , struct "t*16?" $
+        rakk "1"
+      , struct ("t(1,<4 3>,<3 1>)") $
+        s "<cp 808>"
+      , struct "t*16?" $
+        rakk "4"
+      , struct "t*32" $ rakk "12"
+      ] # cps (80/240)
+
+
+hush
+
+d2 $ (# cps ("<0.5 1 2.5 0.75>" * (range 0.5 2 $ slow 33 sine))) $ stack [
+  repeatCycles 16 $
+  whenmod 6 5 (stutWith 6 (choose [1/12,1/16,1/4]) (# legato 0.5)) $
+  struct "t*4" $
+  n "<df'maj9 ef'm11>" #
+  dek "[2,3]" 1 "[4,<5 3>]"
+, repeatCycles 16 $
+  n "<df ef>" #
+  dek 5 1 2
+, rakk "[1*16?, ~ 11]"
+, struct "t*16" $
+  rakk "12"
+  ] # cps (140/240)
