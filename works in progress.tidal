@@ -82,11 +82,18 @@ d2 $ ur 128 "a b" pats [] # cps (150/240)
 
 
 
-
+hush
 
 let pats =
       [
-        ("a", whenmod 1 8 (iter 3) $ stack [
+        ("a", stack [
+          n "<bf'min7 b'6by9'iii fs'maj7>" #
+          dek 2 (range 0.25 1.5 $ slow 11.11 sine) "<[4 3] 3 4>"
+        , slow 2 $ n "gs a" # dek 6 1 4
+        , struct "t*8" $ rakk "4"
+        ]
+        ),
+        ("b", whenmod 1 8 (iter 3) $ stack [
           someCycles (rev) $
           someCyclesBy 0.33 ((stripe 2).(# legato 0.66)) $
           slow 2 $
@@ -101,23 +108,25 @@ let pats =
           slow 2 $
           struct (binaryN 16 8675309) $
           rakk "{<6 5>, ~ 2}"
+        , cat [n "{gs*2 gs*3}%4", n "{a*4}"] #
+          dek 6 1 4
         ]
         ),
-        ("b", whenmod 12 5 (iter 2) $ stack [
+        ("c", whenmod 12 5 (fast "<1 2>" . iter 2) $ stack [
           slow "<4 6 8>" $
-          struct ("t(<11 13 15>,16,<0 3 1 2>)") $
+          struct ("t(<10 8 6>,16,<0 3 1 2>)") $
           n "<bf'min7 b'6by9'iii fs'maj7>" #
-          dek 2 (range 0.25 1.5 $ slow 11.11 sine) "<[4 3] 3 4>"
+          dek 2 (range 0.25 1.5 $ slow 11.11 sine) "<[4 3] 3 5>"
         , slow "<6 8>" $
           someCyclesBy 0.88 (slow 2 . chop 3) $
-          someCyclesBy 0.66 (struct "t*4" . off 0.011 (slow 2.22 . someCyclesBy 0.55 (jux rev . stripe 2))) $
+          someCyclesBy 0.66 (struct "t*4" . off 0.125 (slow 2 . someCyclesBy 0.55 (rev . stripe 2))) $
           n (arp "up" "<bf'min7'16 b'6by9'14 fs'maj'8>") #
           dek "[3,<8 ~>,4]" 1 "<2 3>"
         , rarely (slow 2 . chunk 3 (palindrome)) $
           slow 3 $
           stripe 2 $
-          n "[bf fs] <[b*4 f3*3] [df*2 b*3]>" #
-          dek 5 1 "[2 3 4] <[4 2 3] [4 4 2]>"
+          n "[bf fs] <[df*4 f3*3] [df*2 af*3]>" #
+          dek 5 1 "[2 3 2] <[2 2 3] [3 2 2]>"
         , someCyclesBy 0.44 (rev . slow 2 . stutWith 12 (1/72)(|* gain 0.92)) $
           someCyclesBy 0.33 (stutWith 2 (2/3) id) $
           struct "~ t" $
@@ -131,8 +140,7 @@ let pats =
         )
       ]
 in
-d2 $ ur 32 "a b" pats [] # cps (90/240)
-
+d2 $ ur 96 "a b c" pats [] # cps (90/240)
 
 
 
@@ -315,3 +323,185 @@ d2 $ fast "<2 [1 2] 2>" $ stack [
 , someCyclesBy 0.22 (stutWith 2 (1/3)(0.33 ~>)) $
   rakk "[1,<4 [~ ~ [6,7]*2] ~ ~ >]"
 ] # cps (100/240)
+
+
+
+
+
+
+
+d2 $ whenmod 10 1 (slow 3).(iter 4).(chop 4) $
+    stack [
+    someCyclesBy 0.33 (rev) $ slow 2 . stutWith "<6 8 12>" (1/24)(|* legato 0.66).(|* gain 0.66) $
+    n "{bf*2@4 af*2@2, ~ c*4@6 ef*4@6 g*4@6}%6" #
+    dek 3 1 "4 5 3"
+  , while "<f t f f>" (mute) $
+    repeatCycles 4 $
+    n "<g'five af'six>" #
+    dek "[2,8]" 1 "<3 4 3 4>"
+  , repeatCycles 4 $
+    n "<g af>" #
+    dek 5 1 2
+  , rakk "[1,4]*4"
+  , someCyclesBy 0.22 (plyWith 4 (|* legato 0.97)) $
+    destabilizeBy (range 0 0.11 $ slow 4 sine) $
+    rakk "~ 3"
+  ] # cps (80/240)
+
+
+
+
+
+hush
+
+let pats =
+      [
+        ("a", stack [
+          someCycles (slow 4) $
+          whenmod 10 4 (off 0.125 ((# legato 4) . slow 2)) $
+          someCyclesBy 0.55 (iter 2) $
+          struct "t(<3 5 7>,8)" $
+          n (unwrap $ fit 5 [(arp "pinkyup <down up>" "<fs'six'12 [bf'm9'4 bf'7sus4'4]>"), "<df'sus2 [~ af'six]>", (arp "diverge up" "df'sus4'8")] "{1 [1 0|~] [~|0*4|2*4] 4*8 [2,<0 3>]}%<1 2 1 4>") #
+          dek 3 "1 2" "3 4 3 5 4 4"
+        , repeatCycles 16 $
+          n "<fs df>" #
+          dek 5 1 2
+        , someCyclesBy 0.66 (slow 4 . bite 1 "0*6") $
+          struct "t*8?" $
+          rakk "[1,4]"
+        , someCyclesBy 0.33 (stutWith 2 (2/3)(# amp 0.33)) $
+          rakk "~ 3"
+        , n "<{c ~  ~ c*3}%4 c*12 ~ ~>" #
+          dek 6 "<{6} 1>" 3
+        ]
+        ),
+        ("b", stack [whenmod 12 5 (iter 2) $
+          slow 2 $
+          someCyclesBy 0.55 (slow 2 . chop "<3 4 5>") $
+          n (unwrap $ fit 4 [arp "down" "ef'sus2'8", arp "updown" "fs'6by9'8", arp "pinkydown" "bf'min7'6"] "{0(<2 3>,<6 7>) 4(3,8) [1*3 ~ ]}%<2 1>") #
+          dek 2 1 "[3,4]"
+        , struct "t(3,8,<0 0 3 0>)" $
+          n "<[ef]*3 ef ef ef [f fs]>" #
+          dek 5 2.5 2
+        , struct "t(3,8,<0 3 0 0>)" $
+          rakk "1"
+        , someCyclesBy 0.44 (stutWith 2 (2/3) id) $
+          rakk "~ 3"
+        ]
+        ),
+        ("c", stack [whenmod 12 5 (iter 2) $
+          slow 2 $
+          someCyclesBy 0.55 (slow 2) $
+          n (arp "<down up>" "ef'sus2'8") #
+          dek 4 1 "[3,4]"
+        , fast 2 $
+          struct "t(3,8,<0 0 3 0>)" $
+          n "<[ef]*3 df df ef [bf fs]>" #
+          dek 5 2.5 "2 3 2 2"
+        , struct "t(3,8,<0 3 0 0>)" $
+          rakk "1"
+        , someCyclesBy 0.44 (stutWith 2 (2/3) id) $
+          rakk "~ 3"
+        ]
+        )
+      ]
+in
+d2 $ ur 48 "a b c" pats [] # cps (135/240)
+
+
+
+
+hush
+
+let pats =
+      [
+        ("a", stack [
+          while "<t t t t f f f f>" (# legato 0.5) $
+          n "[~ af'min7'ii] {a'5 ~ a a'sus2 <~ a>}%6" #
+          dek 2 1 "<[5 4] [4 3]>"
+        , slow 1 $
+          n "<b [af fs] a df df df df [df a]>" #
+          dek 5 1 2
+        , someCyclesBy 0.33 (degradeBy 0.22) $
+          struct "t*16" $
+          rakk "4"
+        , struct (binaryN 16 1654544) $
+          rakk "1"
+        , someCyclesBy 0.55 ("<0.25 0.5 0.75>" ~>) $
+          trunc 0.25 $ struct ((inv) (binaryN 16 1654544)) $
+          rakk "3"
+        ]
+        ),
+        ("b", stack [
+          whenmod 11 5 (const $ off 0.33 (|+ n "7 7 5 5 7 5 7 3 5 5 7 0 0 0 0 0") $
+          n (arp "updown" "df'min7'16") #
+          dek 2 1 3) $
+          off "<0.125 0.625>" (|+ n "7 7 5 5 7 5 7 3 7 5 7 0 0 0 0 0") $
+          n (arp "up down" "df'min7'16") #
+          dek 3 1 3
+        , n "<b [af fs] a df df df df [df a]>" #
+          dek 5 1 2
+        , someCyclesBy 0.33 (degradeBy 0.22) $
+          struct "t*16" $
+          rakk "4"
+        , struct (binaryN 16 1654544) $
+          rakk "1"
+        , someCyclesBy 0.55 ("<0.25 0.5 0.75>" ~>) $
+          trunc 0.25 $
+          struct ((inv) (binaryN 16 1654544)) $
+          rakk "3"
+        ]
+        ),
+        ("c", stack [
+          while "<t t t t f f f f>" (# legato 0.75) $
+          n "[~ af'min7'ii] {a'5 ~ a a'sus2 <~ a>}%6" #
+          dek 2 1 "<[5 4] [4 3]>"
+        , whenmod 11 5 (const $ slow 2 $ off 0.33 (|+ n "7 7 5 5 7 5 7 3 5 5 7 0 0 0 0 0") $
+          n (arp "updown" "df'min7'32") #
+          dek 3 1 2) $
+          off "<0.125 0.625>" (|+ n "7 7 5 5 7 5 7 3 7 5 7 0 0 0 0 0") $
+          n (arp "up down" "df'min7'16") #
+          dek 2 1 3
+        , n "<b [af fs] a df df df df [df a]>" #
+          dek 5 1 2
+        , slow 3 $
+          struct "t*16 t*12 t*8 t*6 t*8 t*12" $
+          rakk "4"
+        , struct (binaryN 16 1654544) $
+          rakk "1"
+        , someCyclesBy 0.55 ("<0.25 0.5 0.75>" ~>) $
+          trunc 0.25 $
+          struct ((inv) (binaryN 16 1654544)) $
+          rakk "3"
+        ]
+        )
+      ]
+in
+d2 $ ur 48 "a b c" pats [] # cps (135/240)
+
+
+
+
+
+hush
+
+
+
+
+
+
+
+
+
+hush
+
+d2 $ spaceOut [1.2,1.1,1,0.9,0.8,0.7,0.6] $ stack [
+  struct "t*12 t*8 t*6" $
+  n "<af af'maj9@1.5 [af'five,f*3@3]@0.75 af'sus4@3 c'min>" #
+  dek 2 (range 0.55 1.55 $
+  slow 12 sine) "4 5 5 4 3"
+, n "<[c df@2 c af] [df f@2 df c] [c ~ c@2 ~] [~ af ~ c@2]>" #
+  dek 5 1 2
+, struct "t*12 t*8 t*6" $
+  rakk "[1 <3 6>, 4]"
+] # cps (70/240)
