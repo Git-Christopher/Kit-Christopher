@@ -1282,28 +1282,6 @@ d2 $ whenmod 5 4 (fast 2) $ stack [
 hush
 
 
-
-
-
-
-
-
-
-d2 $ whenmod 7 4 (fast 2 . trunc 0.25) $ slow "<2 4>" $ stack [
-  slow 2 $
-  every 2 (slow 3 . rev . iter 4 . chop 4) $
-  stutWith "<4 8 12>" (1/24)((|* legato 0.92).(|* gain 0.92)) $
-  n (arp "[diverge, up down]" "<f'7sus4'16 bf'9sus4'16 bf'm11'16>") #
-  dek "<3 2>" "1 4" "3 {3 2 2 3}%3"
-, struct "<t t*2>" $
-  n "<bf c>" #
-  dek 5 1 "<2 [3 2] [4 2] 2>"
-, rakk "1*16?"
-, someCyclesBy 0.44 ((0.33 <~) . slow 2) $
-  rakk "~ 3"
-] # cps (110/240)
-
-
 d2 $ someCyclesBy 0.22 ((|+ n 7).(linger "<0.25 0.5>")) $ n (arp "down" "c'min7'8") # dek 2 1 3
 
 hush
@@ -1989,12 +1967,79 @@ d2 $ stack [
 
 
 
-d2 $ n "c" # dek 2 1 4
 
 
+
+
+
+
+
+
+
+d2
+  $ stack [
+    midibend $ (segment 32 $ (range 0 16000 $ slow 2 isaw))
+    , n "0"]
+  # dek 3 2 4
+
+
+let
+
+
+
+
+d2 $ stack [midibend "<{0 0 -8192 16384 8192 ~ 0 0}%<12 6 1 24> {0 0 0 0}>", n (arp "down [<up converge>]" "c'maj'8 [e'm7s5'8 a'min'4]")] # dek "[3,2]" "1 1.5 2 1 3" 3
+
+
+hush
+
+d2 $ midibend (slow 2 $ segment 32 $ range 8192 10000 sine) # dek 2 1 4
+
+d2 $ slow 2 $ stack [
+  n "c4 c5 d5" # midibend ("<0>" ~> (segment 128 $ range 0 8192 isaw))
+] # dek 2 1 4
+
+d2 $ midibend (slow 2 $ segment 32 $ range 8192 10000 sine) # s "midi1"
 
 d2 $ slow 1 $ n "<df'5 ef'sus2>" # dek 8 1 4
 
 hush
+
+
+-- default
+d1 $ n "f" # s "superchip" # gain 0.6
+
+-- same octave as default (5)
+d2 $ n "f5" # s "superchip" # gain 0.6
+
+-- octave 7 = +2 relative to default
+-- sound is same octave as default (f3 +2 = f5)
+d3 $ n "f3" # s "superchip" # gain 0.6 # octave 7
+
+-- octave 2 = -3 relative to default
+-- sound is same octave as default (f8 -3 = f5)
+d4 $ n "f8" # s "superchip" # gain 0.6 # octave "2"
+
+
+
+d2 $ n "<df'5 ef'sus2>" # dek 8 1 5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 x

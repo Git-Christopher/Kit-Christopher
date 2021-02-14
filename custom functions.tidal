@@ -1,4 +1,8 @@
-let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
+import Sound.Tidal.Bjorklund (bjorklund)
+
+let
+    flood = putStrLn . concat . replicate 9999
+    replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
     spill text2 = sequence_(replicator text2)
     replicator' n text1 = [putStr (text1) | x <- replicate n text1]
     spill' n text2 = sequence_(replicator' n text2)
@@ -11,6 +15,7 @@ let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
     trap p = slow 2 $ foldEvery [4,5,6] (stripe 2) $ p
     screw p = someCyclesBy 0.66 (plyWith 2 ((0.25 <~).(# legato 0.5))) $ p
     tilt p = whenmod 11 5 ((spaceOut [2,1.95..0.75]).(iter 2)) $ p
+    twirl p = outside "<2 4>" (chop 2 . stutWith 12 (1/24)(|* legato 0.9)) $ p
     slide x = accelerate (2 **| (x |/ 12) - 1)
     shrand x = (x ~>) $ rand
     dRack :: Pattern String -> ControlPattern
@@ -31,8 +36,16 @@ let replicator text1 = [putStr (text1) | x <- replicate 9999 text1]
     ccup n = ccv (range 0 127 $ saw) # ccn n
     ccdown n = ccv (range 127 0 $ saw) # ccn n
     randcc n = ccv (range 0 127 $ rand) # ccn n
+    fill :: Int -> Int -> Pattern Bool
+    fill n x = timeCat $ map (\d -> (toRational d,pure True)) $ iois 0 $ bjorklund (n,x)
+        where iois :: Int -> [Bool] -> [Int]
+              iois 0 [] = []
+              iois i [] = (i:[])
+              iois 0 (True:xs) = iois 1 xs
+              iois i (True:xs) = i:(iois 1 xs)
+              iois i (False:xs) = iois (i+1) xs
 
-spill "check 1 2 "
+spill " ho ho ho  "
 
 
 --first

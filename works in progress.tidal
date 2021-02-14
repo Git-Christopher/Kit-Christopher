@@ -1,40 +1,5 @@
 hush
 
-do
-    let space p = whenmod 11 5 (shuffle 2 . bite 2 "{0 1 [~|1*4] 0 [1*2|0*3]}%<1 1.5 0.5>") $ while "<f f t t f>" (rev . iter 2 . (slow 4 . stutWith 2 (0.1625) (trunc 0.125))) $ p
-    d2 $ someCyclesBy 0.11 (space) $ stack [
-        someCyclesBy 0.11 (mask ("t*4?")) $
-        someCyclesBy 0.77 (chunk 2 (slow 2 . rot 2)) $
-        someCyclesBy 0.55 (slow 4 . chop 3 . (# legato 0.5)) $
-        struct "<t*16?>" $
-        n "<fs'6by9'4 af'7sus4'4 bf'min'4 fs'sus2'4>" #
-        dek "[3,<4 ~>]" 1 "4 3 5 4 4" |+
-        n "<[<12 0>] [<7 0>] [0 5] [<0 7>]>"
-      , slow "1 2" $ struct "<t*16?>" $
-        n "<fs af bf b>" #
-        dek 5 1 "<3 2 2 2>"
-      , struct "t*16?" $
-        rakk "1"
-      , struct ("t(1,<4 3>,<3 1>)") $
-        s "<cp 808>"
-      , struct "t*16?" $
-        rakk "4"
-      , struct "t*32" $
-        rakk "1 4 [5 6 8] [3 2 4]"
-      ] # cps (80/240)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 let sync = ("<t*8 t*2 f t*6>")
@@ -505,3 +470,19 @@ d2 $ spaceOut [1.2,1.1,1,0.9,0.8,0.7,0.6] $ stack [
 , struct "t*12 t*8 t*6" $
   rakk "[1 <3 6>, 4]"
 ] # cps (70/240)
+
+
+
+
+
+
+
+d2 $ stack [
+  n (arp "converge" "<[ef'sus2'6 ef'maj'3] g'm7s5'6 c'm9'12>") #
+  dek 3 1 "4 3 5"
+, n "<[ef'sus2 ef'maj] g'm7s5 c'm9>" #
+  dek 2 (range 1 5 $ slow 12 sine) 5
+, struct "<t*6 [t*12]*<[2 1.5] 1>>" $
+  n "<ef g c>" #
+  dek 5 1 "2"
+] # cps (95/240)

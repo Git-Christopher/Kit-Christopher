@@ -1,0 +1,97 @@
+
+
+
+
+hush
+
+let sync = "<[t*3 t*2] [t*4 t*3@2]>"
+    sync' = "[t*12 t*8]"
+    sync'' = "t*4"
+    pats =
+      [
+        ("a", stack [
+            someCyclesBy 0.44 (const $ stack [rakk "{5@4.5 [~ 6@2] ~}%1.5", bite 2 "{0*2 1*2 0*3}%<1>" $ rakk "[[4*4@2 4*4], ~ ~ [2 [4,3*2@2]]]"]) $ struct (sync) $
+            while "t(5,16)" (iter 2) $ rakk "<[1,4] <{[4 3],[2,8]} [~ 1 7]>>"
+          , n "df" # dek 5 1 2
+          , rakk "8"
+            ]
+        ),
+        ("b", stack [
+            whenmod 11 5 (const $ stack [rakk "{6@4.5 [~ 5@2] ~}%1.5", bite 2 "{1*2 0*3}%<1>" $ rakk "[[4*4@2 4*4], ~ ~ [2 [4,3*2@2]]]"]) $
+            struct (sync) $
+            rakk "<[1,4] <3 [~ 1 7]>>"
+          , struct (sync) $
+            n "df" #
+            dek 5 1 2
+          , someCycles (off 0.25 (chop 2)) $ n (arp "down" "<df'min'6>") # dek 4 0.5 3
+            ]
+          ),
+          ("c", stack [
+            struct (sync) $
+            rakk "<[1,4] <3 [~ 1 7]>>"
+          , struct (sync) $
+            n "<df!7 fs>" #
+            dek 5 1 2
+          , struct (sync) $
+            n "<df'min7!7 [fs'sus2 fs'm11 fs'sus2]>" #
+            dek 2 "0.25 0.125 [2 0.5] <1 0.1625 0.75 0.0125>" "<5!7 [4 5]>"
+          , while "<t t t f f f f f>" (mute) $ struct "t*3" $ rakk "2"
+            ]
+        ),
+        ("d", whenmod 11 5 (fast "<2 1 0.25 1.5>" . iter 2) $ stack [
+            while "<t f f t f>" (slow 2 . struct (sync')) $
+            struct (sync) $
+            rakk "<[1,4] <3 [~ 1 7]>>"
+          , whenmod 12 7 (# n "<b af>") $
+            while "<t f f t f>" (slow 2 . struct (sync')) $
+            struct (sync) $
+            n "<df!7 fs>" #
+            dek 5 1 2
+          , while "<t f f t f>" (slow 2 . struct (sync')) $
+            struct (sync) $
+            n "<df'min7!7 [fs'sus2 <fs'm11 df'9sus4> fs'sus2]>" #
+            dek 2 "0.125 [2 0.5] <1 0.1625 0.75 0.0125>" "<5!7 [4 5]>"
+            ]
+          ),
+        ("e", whenmod 11 5 (spaceOut [1,0.95..0.5]) $ stack [
+            while "<t f f t f>" (slow 2 . struct (sync')) $
+            struct (sync) $
+            rakk "<[1,4] <<3 [1,2] 4 2> [~ 1 7]>>"
+          , (|+ n "<-7>" ) $ stack [
+            whenmod 12 7 (# n "b") $
+            while "<t f f t f>" (slow 2 . struct (sync')) $
+            struct (sync) $
+            n "<df!7 fs>" #
+            dek 5 1 "3 2"
+          , while "<t f f t f>" (slow 2 . struct (sync')) $
+            struct (sync) $
+            n "<af'm9>" #
+            dek "[2,4]" "3 0.125 [1.5 0.5] <2 0.1625 0.25 0.1625>" 5
+          , stack [midibend "<0!3 {0 0 8192 -8192 333}%6>", slow 6 $
+            off "0.1425" (# legato 2) $
+            n (arp "<up down> pinkydown" "<b'maj9'6 b'sus2'6>")
+          ] # dek 3 "1 0.5 4" "5 4 5 5"
+            ]]
+          ),
+          ("f", stack [
+            while "<t f f t f>" (slow 2 . struct (sync'')) $
+            struct (sync) $
+            rakk "<[1,4] <<3 [1,2] 4 2> [~ 1 3]>>"
+          , stack [
+            whenmod 12 7 (# n "[b af]") $
+            while "<t f f t f>" (slow 2 . struct (sync'')) $
+            struct (sync) $
+            n "<df!7 fs>" #
+            dek 5 1 "3 2"
+          , (|+ n "<-7>" ) $
+            stack [midibend "<0!3 {0 0 8192 -8192 333}%6>", slow 6 $
+            off "0.1425" (# legato 0.5) $
+            n (arp "down <pinkydown pinkyup>" "<b'maj9'12 b'sus2'12>")
+          ] # dek "[3,4]" "1 [0.5 2]" 4
+            ]]
+          )
+      ]
+in
+d2 $ ur 192 "a b c d e f" pats [] # cps (160/240)
+
+hush

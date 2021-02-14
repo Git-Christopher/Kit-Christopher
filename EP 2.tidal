@@ -112,4 +112,143 @@ d2 $ ur 128 "a b c [d|e]" pats [] # cps (115/240)
 
 
 
-a b c [d|e]
+
+hush
+
+let pats =
+      [
+        ("a", stack [slow "4 2" $
+          struct "t(<6 8 3 12>,<4 6>,<0 0 3 1 2>)" $
+          someCyclesBy 0.55 (fast 2 . off 0.1625 (arp "[diverge up converge]") . (# dek "[2,3]" 2 "4 [5 3]")) $
+          n "<ef'maj [[bf'sus2 c'min] af'sus2] [f'min7 g'm7s5] af'sus2>" #
+          dek 2 1 "5 4 3 4 5"
+        , slow 2 $
+          n "<c cs>" #
+          dek 6 1 0
+        , rakk "<[1,4] [2]>*<4 8>"
+        , n "<<ef bf c> [f af]>" # dek 5 1 2
+        ]
+        ),
+        ("b", someCyclesBy 0.22 (rev . rot 1) $ stack [
+          someCyclesBy 0.55 (slow 2 . off 0.125 (arp "up") . (# legato 0.8)) $
+          struct "<t*8 [t*4 t*3]>" $
+          n "<<ef'maj c'm9> af'sus2 ef'maj9 [f'min7 g'm7s5]>" #
+          dek "2 [4,3]" (range 1 2.5 $ slow 4 sine) "4 5 5 6 3 4 5 4 3"
+        , slow 2 $
+          n "<[c bf] [af ef]>" #
+          dek 5 1 "2 3 3 2 3 2 2 3"
+        , struct "t(2,4,<0 3>)" $
+          rakk "1"
+        , struct "t*8 [t*4 t*3]" $
+          rakk "4"
+          ]
+        )
+      ]
+in
+d2 $ ur 64 "a b" pats [] # cps (115/240)
+
+
+
+
+
+
+
+
+--depot drama
+let pats =
+      [
+        ("a", stack [
+            someCyclesBy 0.55 (struct "t*8?") $
+            n "<f'sus2 d'min7 c'7sus4 d'min>" # dek 4 1 "4 <3 5 4>"
+          ]
+        ),
+        ("b", stack [
+            someCyclesBy 0.55 (struct "t*8?") $
+            n "<f'sus2 d'min7 c'7sus4 d'min>" #
+            dek 2 1 "4 5 4 4 6 5"
+          , n "<f c> <d a g>" #
+            dek 5 1 "<[3 2] 2 3>"
+            ]
+        ),
+        ("c", stack [
+            stack [
+              midibend "<{0 0 -8192 16384 8192 ~ 0 0}%<12 6 1 24> {0 0 0 0}>"
+            , n (arp "down" "c'maj'8 [e'm7s5'8 a'min'4]")
+            ] # dek "[3,2]" "1 1.5 2 1 3" 3
+          , someCyclesBy 0.55 (struct "t*8?") $
+            n "<f'sus2 d'min7 c'7sus4 d'min>" #
+            dek 2 1 "4 5 4 4 6 5"
+          , n "<f c> <d a g>" #
+            dek 5 1 "<[3 2] 2 3>"
+          ]
+        ),
+        ("d", stack [
+            stack [
+              midibend "<{0 0 -8192 16384 8192 ~ 0 0}%<12 6 1 24> {0 0 0 0}>"
+            , n (arp "down" "c'maj'8 [e'm7s5'8 a'min'4]")
+            ] # dek "[3,2]" "1 1.5 2 1 3" 3
+          , someCyclesBy 0.55 (struct "t*8?") $
+            n "<f'sus2 d'min7 c'7sus4 d'min>" #
+            dek 2 1 "4 5 4 4 6 5"
+          , n "<f c> <d a g>" #
+            dek 5 1 "<[3 2] 2 3>"
+          , rakk "{1 ~ 1*4 ~ ~ 4 3 [7,1], <4*3 4*3 2*2@4>}%4"
+          ]
+        )
+      ]
+in
+d2 $ ur 64 "a b c d" pats [] # cps (90/240)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+let pats =
+      [
+        ("a", whenmod 11 5 (const $ stack [struct "t*32?" $
+          stack [midibend "{16384 0 0 0 -8192}%3", n (arp "converge" "[df'6by9'4, bf'sus4'6]")] # dek "[2,~ 3]" 3 "4 3"
+        , n "ef [df af bf]" # dek 5 1 2
+        , cat [rakk "4*4", rakk "1*16"]
+          ]) $
+          someCyclesBy 0.33 (slow 1.5 . stripe 2) $ stack [
+          cat [n "<[df'maj,<af c bf>] fs'sus2>", ("<0.25 0.125>" <~) $
+          n (arp "[down|up]" "ef'min'8 f'm7s5'6")] #
+          dek "[2,3,4]" 1 "[4 3,2]"
+        , rakk "[1,4,2/6]*4"
+        ]
+        ),
+        ("b", someCyclesBy 0.44 (const $ stack [struct "t(12,8)" $
+          stack [midibend "{16384 0 0 0 -8192}%3", n (arp "converge" "ef'm9'16")] # dek "[3,8]" 3 "4 3"
+        , n "fs [ef af bf]" # dek 5 1 2
+        , cat [rakk "7*4", rakk "1*16"]
+          ]) $
+          someCyclesBy 0.55 (slow 2 . iter 2) $ stack [
+          cat [n "<af'sus4 fs'sus2>", ("<0.5>" <~) $
+          n (arp "pinkyup converge" "<bf'min7'12, [~ df'six'4]>")] #
+          dek "[2,3]" 1.5 "[4 3,2]"
+        , rakk "[1,4,2/6]*3"
+        , rakk " ~ 3"
+        ]
+        )
+      ]
+in
+d2 $ ur 64 "a b" pats [] # cps (125/240)
+
+
+
+
+hush
+
+d2 $ slow 2 $ rakk "1 3 4"
