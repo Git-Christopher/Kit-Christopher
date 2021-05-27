@@ -486,3 +486,100 @@ d2 $ stack [
   n "<ef g c>" #
   dek 5 1 "2"
 ] # cps (95/240)
+
+
+
+
+
+
+
+d1 $ stack [
+  (|+ n "<0 0 0 0>") $
+  struct "{t(4,8,0)}%{0.5,<2 4 8>}%1.5" $
+  cat [n "<bf'm9 b'sus2 fs'6by9>"] #
+  dek 3 "1 0.5 2 0.5 3 0.5" "4 3 3"
+, n "<<ef af> df fs>" #
+  dek 5 1 2
+, struct "t(3,8,<0 1 3>)" $
+  rakk "1"
+, struct "<t*12 t*8!2>" $
+  rakk "4"
+] # cps (90/240)
+
+
+hush
+
+
+
+
+
+
+let pats =
+      [
+        ("a", stack [
+          slow 2 $
+          struct "<[t*4 t*3] t*16? t*8?>" $
+          someCycles (rev) $
+          bite 4 "{<1 0 3>*2@4 <1 1 0> <2 0 3>*2@4 <0 2>*2 3*4@2 1*4@4 0@2}%<16 8>" $
+          n (arp "diverge {down, <up ~>}" "<[df'maj9'8 df'maj7'8]!3 f'min7'8>") #
+          dek 3 0.5 "5 4 3 4"
+        , struct "t*8?" $
+          n "<af fs <f [f bf]>>" #
+          dek 5 1 2
+        , n "<af'sus4 fs'sus2 [f'min bf'm7s5]>" #
+          dek 2 0.5 "<4!2 [4 3]>"
+        , struct "t*8?" $
+          rakk "1"
+        ]
+        ),
+        ("b", stack [
+          degrade $
+          whenmod 11 5 (rev) $
+          someCycles (within (0.5,1) (hurry 2 . ply 2 . (|+ n "-7 -5"))) $
+          struct "<t*4 [t*2]>" $
+          n "<af ef>" #
+          dek 3 0.5 "5 4 6"
+        , degrade $
+          struct "t*2" $
+          n "<af'maj9 af'maj7 af'maj af'sus4>" #
+          dek 2 "<0.5!4 ~!4>" "<[4 3] 3>" #
+          gain "<0.79!2>"
+        , struct "t*8?" $
+          n "{df f bf}%1" #
+          dek 5 1 "[2,3]"
+        , struct "t*8?" $
+          rakk "1"
+        ]
+        )
+      ]
+in
+d2 $ ur 16 "a b" pats [] # cps (160/240)
+
+
+
+do
+  let sync = "{t*3 t*4}%6"
+      sync'= "{t*3 t*4}%4"
+  d2 $ stack [
+      struct (sync) $
+      n "<fs'6by9!16 af'sus4!16>" #
+      dek 2 "<0.77 0.88 0.99 0.88>" 3
+    , struct (sync') $
+      n "{f df ef af bf fs}%1.5" #
+      dek 5 (range 0.5 1 $ slow 12 sine) 2
+    , struct (sync') $
+      rakk "[1,4]"
+    , rakk "~ 3"
+    , slow "{2 4}%6" $
+      struct "{t(<6 7>,8,3)}%4" $
+      n (arp "downup converge" "fs'6by9'12 af'sus4'12") #
+      dek 3 1 3
+    ] # cps (90/240)
+
+
+
+
+
+
+
+hush

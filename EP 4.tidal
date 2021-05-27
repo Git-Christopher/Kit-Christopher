@@ -147,11 +147,87 @@ in
 d2 $ ur 144 "a b c d e f g h i" pats [] # cps (90/240)
 
 
+"a b c d e f g h i"
+
+hush
+
+d2 $ someCycles (press) $ rakk "[3(2,16,4),<4*4 2*2>,1]"
+
+
+
+hush
+
+let pats =
+      [
+        ("a", every 6 (iter 2) $ stack [
+          chunk 4 (slow 2) $ clip "{<2>*3 <10>*2 <1 2>*4 <16 13 15>*2}%<8 4>"
+        ]
+        ),
+        ("b", every 6 (iter 2) $ stack [
+          chunk 4 (slow 2) $ clip "{<13>*3 <10>*2 <1 2>*4 <1 2 14>*2}%<8 4>"
+        , struct "<t!3 t*8?>" $
+          n "<af ef df c df>" #
+          dek 5 1 3
+        ]
+        ),
+        ("c", someCycles (fast 2) $ stack [
+          someCyclesBy 0.66 (off "<0.5 0.25>" (slow 4 . struct "t*8" . arp "down")) $
+          every 2 (press) $
+          n "af'add9'ii!2 af'add9'o af'maj9" #
+          dek "2 3 2" 1 4
+        , struct "<t!3 t*8>" $
+          n "<af ef df c df>" #
+          dek 5 1 2
+        , someCycles (ply 2 . press) $
+          rakk "{1, ~ <4!3 2>*2}%2"
+        ]
+        ),
+        ("d", stack [
+          someCyclesBy 0.66 (off "<0.5>" (slow 4 . struct "t*6")) $
+          chunk 2 (slow 2 . chop 2) $
+          struct "t*16" $ n (arp "converge updown" "<f'm9'16 c'm7s5'16>") #
+          dek 2 "1 0.5 2" "4 3"
+        , struct "<t!3 t*8?>" $
+          n "<f!3 fs>" #
+          dek 5 1 "<3!3 2>"
+        , rakk "{[1,4]*3 4*2 7*4 4*2, ~ <3!3 2>}%<8 4>"
+        , clip "{<7 8 3>*3 <5 4 10>*2 <1 2>*4 <16 13 15>*2}%<8 4>"
+        ]
+        )
+      ]
+in
+d2 $ ur 32 "a b c d" pats [] # cps (90/240)
+
+
+
+d2 $ stack [
+  mute $ struct "t(9,<8 9>)?0.125" $ n "<[b'sus2 b'add9] ef'min7>" # dek 2 1 4
+, n "{c*3}%6" # dek 6 1 3
+]
+
+f'add9 g'six
 
 
 
 
-d2 $ rakk "[3(2,16,4),<4*4 2*2>,1]"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,3 +236,19 @@ d2 $ rakk "[3(2,16,4),<4*4 2*2>,1]"
 
 
 hush
+
+
+
+d2 $ stack [
+  struct "t(9,<8 9>)?0.125" $ n "<[b'sus2 b'add9] ef'min7>" # dek 2 1 4
+, degradeBy 0 $ off 0.125 (iter 2) $ clip "{<7 8>*2 <2 9>*4 <3 8>*4 1}%<4 2>"
+, n "df" # dek 5 1 2
+, rakk "{1*2 4*2 1*4 3}%<4 2>"
+]
+
+d2 $ stack [
+  struct "t(7,<6 7>)?0.125" $ n "<[ef'min7 fs'sus2] gf'six>" # dek 2 1 4
+, degradeBy 0 $ off 0.125 (iter 2) $ clip "{<14 1>*2 <3 7>*4 <3 5>*4 1}%<4 2>"
+, n "gf" # dek 5 1 2
+, rakk "{1*2 4*2 1*4 3, 2}%<4 2>"
+]

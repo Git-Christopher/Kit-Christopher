@@ -369,21 +369,21 @@ let sync = (binaryN 16 "73106")
           ]
         ),
         ("b", whenmod 11 5 (slow 2) $ stack [
-          slow "<2 3 4>" $
-          stutWith "<[8 2] [3 4]>" (1/24)(|* legato "<1.125 0.95>") $
-          struct "<t*8 t*12>" $
-          rakk "[1,[4|8],7]" #
-          legato 1
-        , rakk "~ 3"
-        , slow 8 $
-          repeatCycles 2 $
-          n "af'six" #
-          dek 8 2 "<4 3>"
-        , slow 4 $
-          struct "<t*8 t*12>" $
-          repeatCycles 8 $
-          n "<af f>" #
-          dek 5 1 2
+            slow "<2 3 4>" $
+            stutWith "<[8 2] [3 4]>" (1/24)(|* legato "<1.125 0.95>") $
+            struct "<t*8 t*12>" $
+            rakk "[1,[4|8],7]" #
+            legato 1
+          , rakk "~ 3"
+          , slow 8 $
+            repeatCycles 2 $
+            n "af'six" #
+            dek 8 2 "<4 3>"
+          , slow 4 $
+            struct "<t*8 t*12>" $
+            repeatCycles 8 $
+            n "<af f>" #
+            dek 5 1 2
         ]
         ),
         ("c", stack [
@@ -643,62 +643,62 @@ let sync p = chop "<[4 3] [2 1]>" $ struct "<t*4 t*2>" $ p
         ]
         ),
         ("b", stack[
-          slow 4 $
-          repeatCycles 4 $
-          struct "t(<6 4>,8)" $
-          n "<af'sus2 df'sus2 f'min fs'6by9>" #
-          dek 8 1 "4 4 3 4 3 5"
-        , someCyclesBy 0.11 (fast 2 . rev) $
-          someCyclesBy 0.44 (0.25 <~).(slow 2) $
-          mask (binaryN 8 435) $
-          n (arp "converge <down up>" "<[~ ef'maj'8|c'7sus4'6] [~ af'maj7'12|af'maj9'8]>") #
-          dek "[2 2 3] 2 3" 1 "3 4 3 2 3"
-        , n "e" # dek 6 1 0
+            slow 4 $
+            repeatCycles 4 $
+            struct "t(<6 4>,8)" $
+            n "<af'sus2 df'sus2 f'min fs'6by9>" #
+            dek 8 1 "4 4 3 4 3 5"
+          , someCyclesBy 0.11 (fast 2 . rev) $
+            someCyclesBy 0.44 (0.25 <~).(slow 2) $
+            mask (binaryN 8 435) $
+            n (arp "converge <down up>" "<[~ ef'maj'8|c'7sus4'6] [~ af'maj7'12|af'maj9'8]>") #
+            dek "[2 2 3] 2 3" 1 "3 4 3 2 3"
+          , n "e" # dek 6 1 0
         ]
         ),
         ("c", stack[
-          slow 4 $
-          repeatCycles 4 $
-          struct "t(<6 4>,8)" $
-          n "<af'sus2 df'sus2 f'min fs'6by9>" #
-          dek 8 1 "4 4 3 4 3 5"
-        , someCyclesBy 0.11 (fast 2 . rev) $
-          someCyclesBy 0.44 (0.25 <~).(slow 2) $
-          mask (binaryN 8 435) $
-          n (arp "converge <down up>" "<[~ ef'maj'8|c'7sus4'6] [~ af'maj7'12|af'maj9'8]>") #
-          dek "[2 2 3] 2 3" 1 "3 4 3 2 3"
-        , repeatCycles 4 $
-          struct "t(3,8)?" $
-          n "<af df f fs>" #
-          dek 5 1 2
-        , someCyclesBy 0.33 (slow 2) $
-          rakk "1(3,8,<0 3>)?"
-        , n "e" # dek 6 1 0
-        , rakk "4*2"
+            slow 4 $
+            repeatCycles 4 $
+            struct "t(<6 4>,8)" $
+            n "<af'sus2 df'sus2 f'min fs'6by9>" #
+            dek 8 1 "4 4 3 4 3 5"
+          , someCyclesBy 0.11 (fast 2 . rev) $
+            someCyclesBy 0.44 (0.25 <~).(slow 2) $
+            mask (binaryN 8 435) $
+            n (arp "converge <down up>" "<[~ ef'maj'8|c'7sus4'6] [~ af'maj7'12|af'maj9'8]>") #
+            dek "[2 2 3] 2 3" 1 "3 4 3 2 3"
+          , repeatCycles 4 $
+            struct "t(3,8)?" $
+            n "<af df f fs>" #
+            dek 5 1 2
+          , someCyclesBy 0.33 (slow 2) $
+            rakk "1(3,8,<0 3>)?"
+          , n "e" # dek 6 1 0
+          , rakk "4*2"
         ]
         ),
         ("d", stack[
-          slow 4 $
-          repeatCycles 4 $
-          struct "t(<6 4>,8)" $
-          n "<af'sus2 df'sus2 f'min fs'6by9>" #
-          dek 8 1 "4 4 3 4 3 5"
-        , someCyclesBy 0.11 (fast 2 . rev) $
-          someCyclesBy 0.44 (0.25 <~).(slow 2) $
-          someCyclesBy 0.66 (stutWith 6 (1/48)(|* legato 0.97)) $
-          mask (binaryN 8 435) $
-          n (arp "converge <down up>" "<[~ ef'maj'8|c'7sus4'6] [~ af'maj7'12|af'maj9'8]>") #
-          dek "[2 2 3] 2 8 3" 1 "3 4 3 2 3"
-        , repeatCycles 4 $
-          struct "t(3,8)?0.11" $
-          n "<af df f fs>" #
-          dek 5 2 2
-        , someCyclesBy 0.33 (slow 2) $
-          rakk "1(3,8,<0 3>)?"
-        , someCyclesBy 0.33 (slow 2) $
-          struct "{0 1 [<1*3 0 1*2@2>] 0 0 1*2 [<1*6 1*4@2 0 1*3>] 0}%<8 4 2>" $
-          rakk "~ [3|5] [6 2] 3"
-        , rakk "[4*4, ~ 3]"
+            slow 4 $
+            repeatCycles 4 $
+            struct "t(<6 4>,8)" $
+            n "<af'sus2 df'sus2 f'min fs'6by9>" #
+            dek 8 1 "4 4 3 4 3 5"
+          , someCyclesBy 0.11 (fast 2 . rev) $
+            someCyclesBy 0.44 (0.25 <~).(slow 2) $
+            someCyclesBy 0.66 (stutWith 6 (1/48)(|* legato 0.97)) $
+            mask (binaryN 8 435) $
+            n (arp "converge <down up>" "<[~ ef'maj'8|c'7sus4'6] [~ af'maj7'12|af'maj9'8]>") #
+            dek "[2 2 3] 2 8 3" 1 "3 4 3 2 3"
+          , repeatCycles 4 $
+            struct "t(3,8)?0.11" $
+            n "<af df f fs>" #
+            dek 5 2 2
+          , someCyclesBy 0.33 (slow 2) $
+            rakk "1(3,8,<0 3>)?"
+          , someCyclesBy 0.33 (slow 2) $
+            struct "{0 1 [<1*3 0 1*2@2>] 0 0 1*2 [<1*6 1*4@2 0 1*3>] 0}%<8 4 2>" $
+            rakk "~ [3|5] [6 2] 3"
+          , rakk "[4*4, ~ 3]"
         ]
         ),
         ("e", someCyclesBy 0.22 (bite 4 "{~ 0*3@2 1 1 0 ~ 2*2@4}%4") $
